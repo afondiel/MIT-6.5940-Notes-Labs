@@ -1,6 +1,6 @@
-# TinyML and Efficient Deep Learning Computing - MIT 6.5940 ⚡️
+# MIT 6.5940 - Lecture Notes and Labs⚡️
 
-A comprehensive course on **Efficient Deep Learning Computing**, covering state-of-the-art techniques for model compression, hardware-aware AI, and the efficient deployment of large generative models on resource-constrained devices.
+A comprehensive course on **Efficient AI Computing**, covering state-of-the-art techniques for model compression, hardware-aware AI, and the efficient deployment of large generative models on resource-constrained devices.
 
 ## 🌟 Course Overview
 
@@ -72,3 +72,10 @@ All lab exercises are designed to provide **hands-on experience** with real-worl
 
 - To see the original introductory lecture that sets the stage for the entire course, you can watch [EfficientML.ai Lecture 1 - Introduction (MIT 6.5940, Fall 2023)](https://www.youtube.com/watch?v=rCFvPEQTxKI).
 http://googleusercontent.com/youtube_content/2
+- Final project list (2023- 2024): [EfficientML.ai Project Ideas](https://docs.google.com/document/d/1QiCkCUr_1DnLNUCXUM3g0SQRIbVG5XyrQjdfsUPrIeA/edit?usp=sharing)
+
+
+
+## Acknowledgements
+- Firstly, to Professor [Song Han](https://hanlab.mit.edu/songhan) for his tremendous effort and passion on proving accessible for everyone 
+- Big thanks to [Yifan Lu](https://github.com/yifanlu0227) for his effort on making [All Homeworks Labs Accessible](https://github.com/yifanlu0227/MIT-6.5940?tab=readme-ov-file) 
