@@ -1,10 +1,10 @@
-# MIT 6.5940 - Lecture Notes and Labs⚡️
+# MIT 6.5940 - Notes and Labs⚡️
 
-A comprehensive course on **Efficient AI Computing**, covering state-of-the-art techniques for model compression, hardware-aware AI, and the efficient deployment of large generative models on resource-constrained devices.
+Notes and lab notebooks from [MIT 6.5940, (Fall 2023) : TinyML and Efficient Deep Learning Computing](https://www.youtube.com/watch?v=rCFvPEQTxKI) lectures.
 
 ## 🌟 Course Overview
 
-The monumental scale of modern deep learning, especially Large Language Models (LLMs) and Diffusion Models, demands massive computational and memory resources. This course introduces the **system-algorithm co-design paradigm** necessary to enable powerful, yet accessible, AI applications on devices ranging from massive cloud TPUs to ultra-low-power microcontrollers (TinyML) and nascent Quantum Computers.
+This course introduces the **system-algorithm co-design paradigm** necessary to enable powerful, yet accessible, AI applications on devices ranging from massive cloud TPUs to ultra-low-power microcontrollers (TinyML) and nascent Quantum Computers.
 
 The focus is on achieving **maximal performance with minimal resource consumption**.
 
@@ -18,6 +18,13 @@ Upon completion of this course, you will be able to:
 * **Optimize Distributed Systems:** Implement **Data, Pipeline, and Tensor Parallelism** for efficient training of models that exceed single-GPU memory.
 * **Deploy to the Edge (TinyML):** Design models and system software (**MCUNet, TinyEngine**) capable of running complex AI on microcontrollers with Kilobytes of RAM.
 * **Explore Future Computing:** Understand the fundamentals of **Quantum Machine Learning (QML)** and implement **Noise Mitigation** techniques for current NISQ hardware.
+
+## 💻 Tech Stack & Prerequisites
+
+* **Programming:** Strong proficiency in **Python 3**.
+* **Frameworks:** Experience with **PyTorch** (primary framework) or **TensorFlow**.
+* **Math:** Comfort with **Linear Algebra, Calculus, and Probability**.
+* **Prerequisites:** Familiarity with standard deep learning concepts (CNNs, RNNs, basic optimizers).
 
 ## 📚 Course Structure & Modules
 
@@ -51,31 +58,56 @@ The course is divided into four main modules:
 | **L22** | **Quantum Machine Learning (QML)** | Variational Quantum Algorithms (VQAs), Quantum Kernels, Barren Plateaus. |
 | **L23** | **Noise Robust Quantum ML** | **Zero Noise Extrapolation (ZNE)**, Measurement Error Mitigation (MEM). |
 
-## ⚙️ Practical Lab Environment
+## 💻 Hands-on Lab Environment
 
-All lab exercises are designed to provide **hands-on experience** with real-world frameworks.
+All lab exercises are designed to provide **hands-on experience** with real-world frameworks:
 
 * **LLM Deployment:** Hands-on experience deploying and running **QLoRA-tuned LLMs** (e.g., Llama-2) directly on a local GPU or CPU.
 * **TinyML:** Utilizing the **TinyEngine** and **TensorFlow Lite Micro** frameworks for model deployment on simulated microcontroller environments.
 * **QML:** Using **Qiskit** and **Pennylane** to build, train, and mitigate noise in variational quantum circuits.
 
-## 💻 Tech Stack & Prerequisites
+| Lab | Key Concepts | Notebook | References |
+| :--- | :--- | :--- | :--- |
+| **The Baseline** | - **Parameter Counting** <br> - **FLOPs/MACs Calculation** <br> - **Unoptimized Latency Measurement** | **[L02\_NN\_Basics.ipynb](./)** | |
+| **Model Pruning**| - **Unstructured Pruning** <br> - **Structured Pruning** <br> - Sparsity-Accuracy Trade-offs. | **[L03\_L04\_Pruning.ipynb](lab/notebooks/Lab1.ipynb)**| |
+| **Quantization (PTQ)** | - **Post-Training Quantization (INT8)** <br> - Inference Speed-up <br> - Accuracy Degradation. | **[L08\_Quantization\_PTQ.ipynb](/lab/notebooks/Lab2.ipynb)** ||
+| **Quantization (QAT)** | - **Quantization-Aware Training** for near-lossless INT8 accuracy. | **[L09\_Quantization\_QAT.ipynb](lab/notebooks/Lab4.ipynb)** | |
+| **Neural Architecture Search (NAS)** | - **Differentiable NAS, One-Shot NAS, **Once-for-All (OFA)** | **[L10\_L11\_NAS.ipynb](lab/notebooks/Lab3.ipynb)** | |
+| **LLM Efficiency** | - **QLoRA** (4-bit + LoRA) for memory-efficient multi-billion parameter model fine-tuning. | **[L16\_LLM\_QLoRA\_Finetuning.ipynb](lab/notebooks/Lab1.ipynb)** ||
+| **Edge AI** | - Model conversion to **TensorFlow Lite Micro** <br> - Memory/latency profiling on simulated MCUs. |**[L21\_TinyML\_Deployment.ipynb](lab/notebooks/Lab1.ipynb)** | |
+| **Quantum ML** | - Implementing **Zero Noise Extrapolation (ZNE)** using Qiskit/Pennylane to combat hardware noise. |**[L23\_QML\_Noise\_Mitigation.ipynb](lab/notebooks/Lab1.ipynb)**||
 
-* **Programming:** Strong proficiency in **Python 3**.
-* **Frameworks:** Experience with **PyTorch** (primary framework) or **TensorFlow**.
-* **Math:** Comfort with **Linear Algebra, Calculus, and Probability**.
-* **Prerequisites:** Familiarity with standard deep learning concepts (CNNs, RNNs, basic optimizers).
 
----
+## ✨ Advanced Project Ideas (MIT 6.5940 Final Projects)
+
+These projects represent state-of-the-art research challenges in efficient ML and are suitable for a student team to explore.
+
+> **Full documentation and project details are available here:** [Link to Google Drive Document]
+
+### 1. Project: TSM for Efficient Video Understanding (Temporal Shift Module)
+* [cite_start]**Goal:** Address the challenge of efficient video analysis by leveraging **Temporal Shift Module (TSM)**, which captures temporal relationships without adding computational cost[cite: 8, 10].
+* [cite_start]**Description:** TSM works by shifting part of the channels along the temporal dimension, facilitating information exchange among neighboring frames[cite: 9]. [cite_start]Projects could involve changing the backbone (e.g., from MobileNetV2) or applying TSM to a new video task like fall detection[cite: 14, 15].
+
+### 2. Project: SIGE - Sparse Engine for Generative AI
+* [cite_start]**Goal:** Accelerate image editing in deep generative models by avoiding the re-synthesis of unedited regions[cite: 34, 35].
+* [cite_start]**Description:** **SIGE** (Sparse Inference GEnerator) is a sparse engine that caches and reuses feature maps from the original image to generate *only* the edited regions[cite: 36]. [cite_start]The project focuses on integrating SIGE with **Stable Diffusion XL (SDXL)** to assess and potentially achieve more significant speed improvements[cite: 37, 39].
+
+### 3. Project: QServe for Online Quantized LLM Serving
+* [cite_start]**Goal:** Achieve high-throughput, real-time serving of low-precision quantized LLMs (like INT4) in cloud-based settings[cite: 165, 182].
+* **Description:** The project centers on implementing an **online, real-time serving system** using the **QServe** library, which utilizes the **QoQ (W4A8KV4)** quantization algorithm. [cite_start]The final objective is to build an online Gradio demo to serve these highly-efficient, quantized LLMs[cite: 168, 183, 185].
+
+***
 
 ## References
 
 - To see the original introductory lecture that sets the stage for the entire course, you can watch [EfficientML.ai Lecture 1 - Introduction (MIT 6.5940, Fall 2023)](https://www.youtube.com/watch?v=rCFvPEQTxKI).
-http://googleusercontent.com/youtube_content/2
+http://googleusercontent.com/youtube_content/2)
 - Final project list (2023- 2024): [EfficientML.ai Project Ideas](https://docs.google.com/document/d/1QiCkCUr_1DnLNUCXUM3g0SQRIbVG5XyrQjdfsUPrIeA/edit?usp=sharing)
 
+## 🙏 Acknowledgements
 
+Special thanks to:
 
-## Acknowledgements
-- Firstly, to Professor [Song Han](https://hanlab.mit.edu/songhan) for his tremendous effort and passion on proving accessible for everyone 
-- Big thanks to [Yifan Lu](https://github.com/yifanlu0227) for his effort on making [All Homeworks Labs Accessible](https://github.com/yifanlu0227/MIT-6.5940?tab=readme-ov-file) 
+* **Professor Song Han** ($\text{MIT/HAN Lab}$) for his tremendous effort and passion in developing the **EfficientML.ai** framework and for making this cutting-edge research accessible to everyone.
+* **Yifan Lu** (Github: [yifanlu0227](https://github.com/yifanlu0227)) for his dedication to making the course homework and lab materials publicly accessible and available for the community ([All Homeworks Labs Accessible](https://github.com/yifanlu0227/MIT-6.5940?tab=readme-ov-file)).
+
