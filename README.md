@@ -72,7 +72,7 @@ All lab exercises are designed to provide **hands-on experience** with real-worl
 | **Model Pruning**| - **Unstructured Pruning** <br> - **Structured Pruning** <br> - Sparsity-Accuracy Trade-offs. | **[L03\_L04\_Pruning.ipynb](lab/notebooks/Lab1.ipynb)**| |
 | **Quantization (PTQ)** | - **Post-Training Quantization (INT8)** <br> - Inference Speed-up <br> - Accuracy Degradation. | **[L08\_Quantization\_PTQ.ipynb](/lab/notebooks/Lab2.ipynb)** ||
 | **Quantization (QAT)** | - **Quantization-Aware Training** for near-lossless INT8 accuracy. | **[L09\_Quantization\_QAT.ipynb](lab/notebooks/Lab4.ipynb)** | |
-| **Neural Architecture Search (NAS)** | - **Differentiable NAS, One-Shot NAS, **Once-for-All (OFA)** | **[L10\_L11\_NAS.ipynb](lab/notebooks/Lab3.ipynb)** | |
+| **Neural Architecture Search (NAS)** | - **Differentiable NAS**, One-Shot NAS, **Once-for-All (OFA)** | **[L10\_L11\_NAS.ipynb](lab/notebooks/Lab3.ipynb)** | |
 | **LLM Efficiency** | - **QLoRA** (4-bit + LoRA) for memory-efficient multi-billion parameter model fine-tuning. | **[L16\_LLM\_QLoRA\_Finetuning.ipynb](lab/notebooks/Lab1.ipynb)** ||
 | **Edge AI** | - Model conversion to **TensorFlow Lite Micro** <br> - Memory/latency profiling on simulated MCUs. |**[L21\_TinyML\_Deployment.ipynb](lab/notebooks/Lab1.ipynb)** | |
 | **Quantum ML** | - Implementing **Zero Noise Extrapolation (ZNE)** using Qiskit/Pennylane to combat hardware noise. |**[L23\_QML\_Noise\_Mitigation.ipynb](lab/notebooks/Lab1.ipynb)**||
