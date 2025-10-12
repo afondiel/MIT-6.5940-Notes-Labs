@@ -1,12 +1,10 @@
 # MIT 6.5940 - Notes and Labs⚡️
 
-Notes and lab notebooks from [MIT 6.5940, (Fall 2023) : TinyML and Efficient Deep Learning Computing](https://www.youtube.com/watch?v=rCFvPEQTxKI) lectures.
+Notes and practical notebooks from [MIT 6.5940, (Fall 2023) : TinyML and Efficient Deep Learning Computing](https://www.youtube.com/watch?v=rCFvPEQTxKI) lectures.
 
 ## 🌟 Course Overview
 
-This course introduces the **system-algorithm co-design paradigm** necessary to enable powerful, yet accessible, AI applications on devices ranging from massive cloud TPUs to ultra-low-power microcontrollers (TinyML) and nascent Quantum Computers.
-
-The focus is on achieving **maximal performance with minimal resource consumption**.
+This course will introduce efficient deep learning computing techniques that enable powerful deep learning applications on resource-constrained devices. The main focus is on achieving **maximal performance with minimal resource consumption**.
 
 ## 🎯 Key Learning Objectives
 
@@ -68,21 +66,20 @@ All lab exercises are designed to provide **hands-on experience** with real-worl
 
 | Lab | Key Concepts | Notebook | References |
 | :--- | :--- | :--- | :--- |
-| **The Baseline** | - **Parameter Counting** <br> - **FLOPs/MACs Calculation** <br> - **Unoptimized Latency Measurement** | **[L02\_NN\_Basics.ipynb](./)** | |
-| **Model Pruning**| - **Unstructured Pruning** <br> - **Structured Pruning** <br> - Sparsity-Accuracy Trade-offs. | **[L03\_L04\_Pruning.ipynb](lab/notebooks/Lab1.ipynb)**| |
-| **Quantization (PTQ)** | - **Post-Training Quantization (INT8)** <br> - Inference Speed-up <br> - Accuracy Degradation. | **[L08\_Quantization\_PTQ.ipynb](/lab/notebooks/Lab2.ipynb)** ||
-| **Quantization (QAT)** | - **Quantization-Aware Training** for near-lossless INT8 accuracy. | **[L09\_Quantization\_QAT.ipynb](lab/notebooks/Lab4.ipynb)** | |
-| **Neural Architecture Search (NAS)** | - **Differentiable NAS**, One-Shot NAS, **Once-for-All (OFA)** | **[L10\_L11\_NAS.ipynb](lab/notebooks/Lab3.ipynb)** | |
-| **LLM Efficiency** | - **QLoRA** (4-bit + LoRA) for memory-efficient multi-billion parameter model fine-tuning. | **[L16\_LLM\_QLoRA\_Finetuning.ipynb](lab/notebooks/Lab1.ipynb)** ||
-| **Edge AI** | - Model conversion to **TensorFlow Lite Micro** <br> - Memory/latency profiling on simulated MCUs. |**[L21\_TinyML\_Deployment.ipynb](lab/notebooks/Lab1.ipynb)** | |
-| **Quantum ML** | - Implementing **Zero Noise Extrapolation (ZNE)** using Qiskit/Pennylane to combat hardware noise. |**[L23\_QML\_Noise\_Mitigation.ipynb](lab/notebooks/Lab1.ipynb)**||
+| **The Baseline** | - **Parameter Counting** <br> - **FLOPs/MACs Calculation** <br> - **Unoptimized Latency Measurement** | **[L02\_NN\_Basics.ipynb](./)** | (Still to come)|
+| **Model Pruning**| - **Unstructured Pruning** <br> - **Structured Pruning** <br> - Sparsity-Accuracy Trade-offs. | **[L03\_L04\_Pruning.ipynb](lab/notebooks/Lab1.ipynb)**| [Yifan Lu](https://github.com/yifanlu0227/MIT-6.5940)|
+| **Quantization (PTQ)** | - **Post-Training Quantization (INT8)** <br> - Inference Speed-up <br> - Accuracy Degradation. | **[L08\_Quantization\_PTQ.ipynb](/lab/notebooks/Lab2.ipynb)** |[Yifan Lu](https://github.com/yifanlu0227/MIT-6.5940)|
+| **Quantization (QAT)** | - **Quantization-Aware Training** for near-lossless INT8 accuracy. | **[L09\_Quantization\_QAT.ipynb](lab/notebooks/Lab4.ipynb)** | [Yifan Lu](https://github.com/yifanlu0227/MIT-6.5940) |
+| **Neural Architecture Search (NAS)** | - **Differentiable NAS**, One-Shot NAS, **Once-for-All (OFA)** | **[L10\_L11\_NAS.ipynb](lab/notebooks/Lab3.ipynb)** |[Yifan Lu](https://github.com/yifanlu0227/MIT-6.5940)|
+| **LLM Efficiency** | - **QLoRA** (4-bit + LoRA) for memory-efficient multi-billion parameter model fine-tuning. | **[L16\_LLM\_QLoRA\_Finetuning.ipynb](#)** |(Still to come)|
+| **Edge AI** | - Model conversion to **TensorFlow Lite Micro** <br> - Memory/latency profiling on simulated MCUs. |**[L21\_TinyML\_Deployment.ipynb](#)** |(Still to come)|
+| **Quantum ML** | - Implementing **Zero Noise Extrapolation (ZNE)** using Qiskit/Pennylane to combat hardware noise. |**[L23\_QML\_Noise\_Mitigation.ipynb](#)**|(Still to come)|
 
 
 ## ✨ Advanced Project Ideas (MIT 6.5940 Final Projects)
 
 These projects represent state-of-the-art research challenges in efficient ML and are suitable for a student team to explore.
 
-> **Full documentation and project details are available here:** [Link to Google Drive Document]
 
 ### 1. Project: TSM for Efficient Video Understanding (Temporal Shift Module)
 * [cite_start]**Goal:** Address the challenge of efficient video analysis by leveraging **Temporal Shift Module (TSM)**, which captures temporal relationships without adding computational cost[cite: 8, 10].
@@ -98,16 +95,17 @@ These projects represent state-of-the-art research challenges in efficient ML an
 
 ***
 
+> **Full documentation and project details can be found [here](https://docs.google.com/document/d/1QiCkCUr_1DnLNUCXUM3g0SQRIbVG5XyrQjdfsUPrIeA/edit?usp=sharing)**.
+
 ## References
 
-- To see the original introductory lecture that sets the stage for the entire course, you can watch [EfficientML.ai Lecture 1 - Introduction (MIT 6.5940, Fall 2023)](https://www.youtube.com/watch?v=rCFvPEQTxKI).
-http://googleusercontent.com/youtube_content/2)
+- The Youtube lecture series: [EfficientML.ai Lecture 1 - Introduction (MIT 6.5940, Fall 2023)](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=axVQj3jL6Ix1eyk6).
 - Final project list (2023- 2024): [EfficientML.ai Project Ideas](https://docs.google.com/document/d/1QiCkCUr_1DnLNUCXUM3g0SQRIbVG5XyrQjdfsUPrIeA/edit?usp=sharing)
 
 ## 🙏 Acknowledgements
 
 Special thanks to:
 
-* **Professor Song Han** ($\text{MIT/HAN Lab}$) for his tremendous effort and passion in developing the **EfficientML.ai** framework and for making this cutting-edge research accessible to everyone.
-* **Yifan Lu** (Github: [yifanlu0227](https://github.com/yifanlu0227)) for his dedication to making the course homework and lab materials publicly accessible and available for the community ([All Homeworks Labs Accessible](https://github.com/yifanlu0227/MIT-6.5940?tab=readme-ov-file)).
+* **Professor [Song Han](https://github.com/songhan)** ($\text{MIT/HAN Lab}$) for his tremendous effort and passion in developing the **EfficientML.ai** framework and for making this cutting-edge research accessible to everyone.
+* **[Yifan Lu](https://github.com/yifanlu0227)** for his dedication to making the course homework and lab materials publicly accessible and available for the community ([All Homeworks Labs Accessible](https://github.com/yifanlu0227/MIT-6.5940?tab=readme-ov-file)).
 
