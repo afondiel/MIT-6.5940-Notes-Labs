@@ -1,0 +1,6 @@
+[submodule "lab/notebooks/Lab1-4"]
+	path = lab/notebooks/Lab1-4
+	url = https://github.com/yifanlu0227/MIT-6.5940.git
+[submodule "lab/notebooks/Lab5"]
+	path = lab/notebooks/Lab5
+	url = https://github.com/yifanlu0227/LLaMA2-7B-on-laptop.git
