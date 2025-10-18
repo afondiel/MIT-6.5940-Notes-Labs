@@ -106,6 +106,6 @@ These projects represent state-of-the-art research challenges in efficient ML an
 
 Special thanks to:
 
-* **Professor [Song Han](https://github.com/songhan)** ($\text{MIT/HAN Lab}$) for his tremendous effort and passion in developing the **EfficientML.ai** framework and for making this cutting-edge research accessible to everyone.
+* **Professor [Song Han](https://github.com/songhan)** (MIT/HAN Lab) for his tremendous effort and passion in developing the **EfficientML.ai** framework and for making this cutting-edge research accessible to everyone.
 * **[Yifan Lu](https://github.com/yifanlu0227)** for his dedication to making the course homework and lab materials publicly accessible and available for the community ([All Homeworks Labs Accessible](https://github.com/yifanlu0227/MIT-6.5940?tab=readme-ov-file)).
 
