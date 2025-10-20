@@ -4,7 +4,7 @@ Notes and practical notebooks from [MIT 6.5940, (Fall 2023) : TinyML and Efficie
 
 ## 🌟 Course Overview
 
-This course will introduce efficient deep learning computing techniques that enable powerful deep learning applications on resource-constrained devices. The main focus is on achieving **maximal performance with minimal resource consumption**.
+This course introduces efficient deep learning computing techniques that enable powerful deep learning applications on resource-constrained devices. The main focus is on achieving **maximal performance with minimal resource consumption**.
 
 ## 🎯 Key Learning Objectives
 
