@@ -11,7 +11,7 @@
     * **Low Latency:** Inference near the user for real-time applications (e.g., self-driving, video analysis).
     * **High Privacy:** Data remains local; no need for cloud transfer.
     * **Reduced Cost:** Lower reliance on expensive cloud GPUs.
-    * **Low Power:** Extended battery life for mobile and IoT applications (**TinyML**).
+    * **Low Power:** Extended battery life for mobile and IoT applications (**TinyML**). 
 
 -----
 
