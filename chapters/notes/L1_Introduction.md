@@ -1,9 +1,5 @@
 # Lecture 1: Introduction to Efficient Machine Learning
 
-- **Lecturers:** Professor Song Han
-- **Date:** Fall 2023
-- **Corresponding Course Website Section:** efficientml.ai
-
 ## 1\. 🎯 Why It Matters for Edge AI
 
 * **The Core Problem:** The phenomenal performance of modern deep learning models (LLMs, Diffusion Models) comes at the cost of **enormous scale** (billions of parameters), demanding significant computation (FLOPs) and memory (GBs) resources. This prevents their deployment on resource-constrained **Edge Devices** (mobile phones, IoT, microcontrollers).
