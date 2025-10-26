@@ -29,20 +29,20 @@ Upon completion of this course, you will be able to:
 The course is divided into four main modules:
 
 ### **Module 1: Foundational Efficiency (Lectures 1-6)**
-| Lecture | Topic | Key Techniques Covered |
+| Lecture | Topic | Key Concepts Covered |
 | :--- | :--- | :--- |
 | **L1-L2** | Introduction & Neural Network Basics | FLOPs, MACs, Model Analysis, Performance Metrics. |
 | **L3-L5** | **Pruning & Sparsity** | Fine-Grained/Unstructured, Structured Pruning, Rigging the Lottery (SET, ERK). |
 | **L6** | **Knowledge Distillation** | Teacher-Student Paradigm, Distilling LLMs. |
 
 ### **Module 2: Advanced Model Compression & Design (Lectures 7-11)**
-| Lecture | Topic | Key Techniques Covered |
+| Lecture | Topic | Key Concepts Covered |
 | :--- | :--- | :--- |
 | **L7-L9** | **Quantization** | Post-Training Quantization (PTQ), Quantization-Aware Training (QAT), INT4/Binary Networks. |
 | **L10-L11** | **Neural Architecture Search (NAS)** | Differentiable NAS, One-Shot NAS, **Once-for-All (OFA)**. |
 
 ### **Module 3: Large Model and Distributed Systems (Lectures 12-20)**
-| Lecture | Topic | Key Techniques Covered |
+| Lecture | Topic | Key Concepts Covered |
 | :--- | :--- | :--- |
 | **L12-L14** | **LLM Architectures & Quantization** | Transformers, GPT, LLM Post-Training Optimization (GPTQ). |
 | **L15-L17** | **Parameter-Efficient Fine-Tuning (PEFT)** | **LoRA, QLoRA, Prompt/Prefix Tuning**. |
@@ -50,7 +50,7 @@ The course is divided into four main modules:
 | **L19-L20** | **Distributed Training** | Data Parallelism, **Zero Redundancy Optimizer (ZeRO)**, Pipeline & Tensor Parallelism. |
 
 ### **Module 4: Edge AI and Future Computing (Lectures 21-23)**
-| Lecture | Topic | Key Techniques Covered |
+| Lecture | Topic | Key Concepts Covered |
 | :--- | :--- | :--- |
 | **L21** | **Basics of Quantum Computing** | Qubits, Superposition, Entanglement, Quantum Gates. |
 | **L22** | **Quantum Machine Learning (QML)** | Variational Quantum Algorithms (VQAs), Quantum Kernels, Barren Plateaus. |
