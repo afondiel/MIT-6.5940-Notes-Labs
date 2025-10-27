@@ -24,61 +24,69 @@ Upon completion of this course, you will be able to:
 * **Math:** Comfort with **Linear Algebra, Calculus, and Probability**.
 * **Prerequisites:** Familiarity with standard deep learning concepts (CNNs, RNNs, basic optimizers).
 
-## 📚 Course Structure & Modules
+## 📚 Course Schedule
 
-The course is divided into four main modules:
+### Chapter 0: Introduction
 
-### **Module 1: Foundational Efficiency (Lectures 1-6)**
-| Lecture | Topic | Key Concepts Covered |
-| :--- | :--- | :--- |
-| **L1-L2** | Introduction & Neural Network Basics | FLOPs, MACs, Model Analysis, Performance Metrics. |
-| **L3-L5** | **Pruning & Sparsity** | Fine-Grained/Unstructured, Structured Pruning, Rigging the Lottery (SET, ERK). |
-| **L6** | **Knowledge Distillation** | Teacher-Student Paradigm, Distilling LLMs. |
+| Lecture | Topic (notes) | Slide | Notebook | Reference |
+| :--- | :--- | :--- | :--- | :--- |
+| **L1** | [Introduction](./chapters/notes/L1\_Introduction.md) | [Slides](https://drive.google.com/file/d/1a3z0A1b5747HmocAbHu8kOWglX3CVkha/view?usp=drive\_link) | **—** | [Video](https://youtu.be/6cAmS-\_vEh8?si=2HtY0XwJEfj2gEGK) |
+| **L2** | [Basics of Deep Learning](./chapters/notes/L2\_Basics\_of\_NN.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L02\_NN\_Basics.ipynb](./labs/L02\_NN\_Basics.ipynb)** | [Video](https://youtu.be/Q9bdjoVx\_m4) |
 
-### **Module 2: Advanced Model Compression & Design (Lectures 7-11)**
-| Lecture | Topic | Key Concepts Covered |
-| :--- | :--- | :--- |
-| **L7-L9** | **Quantization** | Post-Training Quantization (PTQ), Quantization-Aware Training (QAT), INT4/Binary Networks. |
-| **L10-L11** | **Neural Architecture Search (NAS)** | Differentiable NAS, One-Shot NAS, **Once-for-All (OFA)**. |
+### Chapter I: Efficient Inference
 
-### **Module 3: Large Model and Distributed Systems (Lectures 12-20)**
-| Lecture | Topic | Key Concepts Covered |
-| :--- | :--- | :--- |
-| **L12-L14** | **LLM Architectures & Quantization** | Transformers, GPT, LLM Post-Training Optimization (GPTQ). |
-| **L15-L17** | **Parameter-Efficient Fine-Tuning (PEFT)** | **LoRA, QLoRA, Prompt/Prefix Tuning**. |
-| **L18** | Application: Efficient Diffusion Models | Fast sampling, distillation for generative AI. |
-| **L19-L20** | **Distributed Training** | Data Parallelism, **Zero Redundancy Optimizer (ZeRO)**, Pipeline & Tensor Parallelism. |
+| Lecture | Topic (notes) | Slide | Notebook | Reference |
+| :--- | :--- | :--- | :--- | :--- |
+| **L3** | [Pruning and Sparsity (Part I)](./chapters/notes/L3\_Pruning\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L4** | [Pruning and Sparsity (Part II)](./chapters/notes/L4\_Pruning\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L03\_L04\_Pruning.ipynb](./labs/L03\_L04\_Pruning.ipynb)** | [Video](#) |
+| **L5** | [Quantization (Part I)](./chapters/notes/L5\_Quantization\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link)| **—** | [Video](#) |
+| **L6** | [Quantization (Part II)](./chapters/notes/L6\_Quantization\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L08\_Quantization\_PTQ.ipynb](./labs/L08\_Quantization\_PTQ.ipynb)** | [Video](#) |
+| **L7** | [Neural Architecture Search (Part I)](./chapters/notes/L7\_NAS\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L8** | [Neural Architecture Search (Part II)](./chapters/notes/L8\_NAS\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L9** | [Knowledge Distillation](./chapters/notes/L9\_Knowledge\_Distillation.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L09\_Quantization\_QAT.ipynb](./labs/L09\_Quantization\_QAT.ipynb)** | [Video](#) |
+| **L10** | [MCUNet: TinyML on Microcontrollers](./chapters/notes/L10\_MCUNet.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L10\_L11\_NAS.ipynb](./labs/L10\_L11\_NAS.ipynb)** | [Video](#) |
+| **L11** | [TinyEngine and Parallel Processing](./chapters/notes/L11\_TinyEngine.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link)| **[L21\_TinyML\_Deployment.ipynb](./labs/L21\_TinyML\_Deployment.ipynb)** | [Video](#) |
 
-### **Module 4: Edge AI and Future Computing (Lectures 21-23)**
-| Lecture | Topic | Key Concepts Covered |
-| :--- | :--- | :--- |
-| **L21** | **Basics of Quantum Computing** | Qubits, Superposition, Entanglement, Quantum Gates. |
-| **L22** | **Quantum Machine Learning (QML)** | Variational Quantum Algorithms (VQAs), Quantum Kernels, Barren Plateaus. |
-| **L23** | **Noise Robust Quantum ML** | **Zero Noise Extrapolation (ZNE)**, Measurement Error Mitigation (MEM). |
+### Chapter II: Domain-Specific Optimization
 
-## 💻 Hands-on Lab Environment
+| Lecture | Topic (notes) | Slide | Notebook | Reference |
+| :--- | :--- | :--- | :--- | :--- |
+| **L12** | [Transformer and LLM](./chapters/notes/L12\_Transformer\_LLM.md)       | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L13** | [Efficient LLM Deployment](./chapters/notes/L13\_LLM\_Deployment.md)   | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L14** | [LLM Post Training](./chapters/notes/L14\_LLM\_Post\_Training.md)      | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L15** | [Long Context LLM](./chapters/notes/L15\_Long\_Context\_LLM.md)        | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L16** | [Vision Transformer](./chapters/notes/L16\_Vision\_Transformer.md)     | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L16\_LLM\_QLoRA\_Finetuning.ipynb](./labs/L16\_LLM\_QLoRA\_Finetuning.ipynb)** | [Video](#) |
+| **L17** | [GAN, Video, and Point Cloud](./chapters/notes/L17\_GAN\_Video\_3D.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L18** | [Diffusion Model](./chapters/notes/L18\_Diffusion\_Model.md)           | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+
+### Chapter III: Efficient Training
+
+| Lecture | Topic (notes) | Slide | Notebook | Reference |
+| :--- | :--- | :--- | :--- | :--- |
+| **L19** | [Distributed Training (Part I)](./chapters/notes/L19\_Distributed\_I.md)                  | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L20** | [Distributed Training (Part II)](./chapters/notes/L20\_Distributed\_II.md)                | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L21** | [On-Device Training and Transfer Learning](./chapters/notes/L21\_On\_Device\_Training.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+
+
+### Chapter IV: Advanced Topics
+
+| Lecture | Topic (notes) | Slide | Notebook | Reference |
+| :--- | :--- | :--- | :--- | :--- |
+| **L22** | [Course Summary + Quantum ML I](./chapters/notes/L22\_Summary\_QML\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L23** | [Quantum Machine Learning II](./chapters/notes/L23\_QML\_II.md)           | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L23\_QML\_Noise\_Mitigation.ipynb](./labs/L23\_QML\_Noise\_Mitigation.ipynb)** | [Video](#) |
+| **L24** | [Final Project Presentation](./chapters/notes/L24\_Project\_Pres.md)      | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L25** | [Final Project Presentation](./chapters/notes/L25\_Project\_Pres.md)      | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L26** | [Final Project Presentation](./chapters/notes/L26\_Project\_Pres.md)      | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+
+## 💻 Hands-on Labs & Advanced Project Ideas (MIT 6.5940 Final Projects)
 
 All lab exercises are designed to provide **hands-on experience** with real-world frameworks:
 
-* **LLM Deployment:** Hands-on experience deploying and running **QLoRA-tuned LLMs** (e.g., Llama-2) directly on a local GPU or CPU.
-* **TinyML:** Utilizing the **TinyEngine** and **TensorFlow Lite Micro** frameworks for model deployment on simulated microcontroller environments.
-* **QML:** Using **Qiskit** and **Pennylane** to build, train, and mitigate noise in variational quantum circuits.
+- **LLM Deployment:** Hands-on experience deploying and running **QLoRA-tuned LLMs** (e.g., Llama-2) directly on a local GPU or CPU.
+- **TinyML:** Utilizing the **TinyEngine** and **TensorFlow Lite Micro** frameworks for model deployment on simulated microcontroller environments.
+- **QML:** Using **Qiskit** and **Pennylane** to build, train, and mitigate noise in variational quantum circuits.
 
-| Lab | Key Concepts | Notebook | References |
-| :--- | :--- | :--- | :--- |
-| **The Baseline** | - **Parameter Counting** <br> - **FLOPs/MACs Calculation** <br> - **Unoptimized Latency Measurement** | **[L02\_NN\_Basics.ipynb](./)** | (Still to come)|
-| **Model Pruning**| - **Unstructured Pruning** <br> - **Structured Pruning** <br> - Sparsity-Accuracy Trade-offs. | **[L03\_L04\_Pruning.ipynb](lab/notebooks/Lab1.ipynb)**| [Yifan Lu](https://github.com/yifanlu0227/MIT-6.5940)|
-| **Quantization (PTQ)** | - **Post-Training Quantization (INT8)** <br> - Inference Speed-up <br> - Accuracy Degradation. | **[L08\_Quantization\_PTQ.ipynb](/lab/notebooks/Lab2.ipynb)** |[Yifan Lu](https://github.com/yifanlu0227/MIT-6.5940)|
-| **Quantization (QAT)** | - **Quantization-Aware Training** for near-lossless INT8 accuracy. | **[L09\_Quantization\_QAT.ipynb](lab/notebooks/Lab4.ipynb)** | [Yifan Lu](https://github.com/yifanlu0227/MIT-6.5940) |
-| **Neural Architecture Search (NAS)** | - **Differentiable NAS**, One-Shot NAS, **Once-for-All (OFA)** | **[L10\_L11\_NAS.ipynb](lab/notebooks/Lab3.ipynb)** |[Yifan Lu](https://github.com/yifanlu0227/MIT-6.5940)|
-| **LLM Efficiency** | - **QLoRA** (4-bit + LoRA) for memory-efficient multi-billion parameter model fine-tuning. | **[L16\_LLM\_QLoRA\_Finetuning.ipynb](#)** |(Still to come)|
-| **Edge AI** | - Model conversion to **TensorFlow Lite Micro** <br> - Memory/latency profiling on simulated MCUs. |**[L21\_TinyML\_Deployment.ipynb](#)** |(Still to come)|
-| **Quantum ML** | - Implementing **Zero Noise Extrapolation (ZNE)** using Qiskit/Pennylane to combat hardware noise. |**[L23\_QML\_Noise\_Mitigation.ipynb](#)**|(Still to come)|
-
-
-## ✨ Advanced Project Ideas (MIT 6.5940 Final Projects)
-
-These projects represent state-of-the-art research challenges in efficient ML and are suitable for a student team to explore.
+For further advanced projects the course provided a set of state-of-the-art research challenges in efficient ML to explore.
 
 
 ### 1. Project: TSM for Efficient Video Understanding (Temporal Shift Module)
@@ -93,13 +101,12 @@ These projects represent state-of-the-art research challenges in efficient ML an
 * [cite_start]**Goal:** Achieve high-throughput, real-time serving of low-precision quantized LLMs (like INT4) in cloud-based settings[cite: 165, 182].
 * **Description:** The project centers on implementing an **online, real-time serving system** using the **QServe** library, which utilizes the **QoQ (W4A8KV4)** quantization algorithm. [cite_start]The final objective is to build an online Gradio demo to serve these highly-efficient, quantized LLMs[cite: 168, 183, 185].
 
-***
-
 > **Full documentation and project details can be found [here](https://docs.google.com/document/d/1QiCkCUr_1DnLNUCXUM3g0SQRIbVG5XyrQjdfsUPrIeA/edit?usp=sharing)**.
 
 ## References
 
 - The Youtube lecture series: [EfficientML.ai Lecture 1 - Introduction (MIT 6.5940, Fall 2023)](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=axVQj3jL6Ix1eyk6).
+- New [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link).
 - Final project list (2023- 2024): [EfficientML.ai Project Ideas](https://docs.google.com/document/d/1QiCkCUr_1DnLNUCXUM3g0SQRIbVG5XyrQjdfsUPrIeA/edit?usp=sharing)
 
 ## 🙏 Acknowledgements
