@@ -2,6 +2,8 @@
 
 ## 1\. 🎯 Why It Matters for Edge AI
 
+
+
 * **The Core Problem:** The phenomenal performance of modern deep learning models (LLMs, Diffusion Models) comes at the cost of **enormous scale** (billions of parameters), demanding significant computation (FLOPs) and memory (GBs) resources. This prevents their deployment on resource-constrained **Edge Devices** (mobile phones, IoT, microcontrollers).
 * **Edge AI Benefits:** EfficientML techniques are crucial for democratizing AI by enabling **fast, private, and always-on** intelligence directly on the device. This provides benefits like:
     * **Low Latency:** Inference near the user for real-time applications (e.g., self-driving, video analysis).
