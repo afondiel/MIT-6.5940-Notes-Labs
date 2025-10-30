@@ -1,52 +1,107 @@
-# Lecture 1: Introduction to Efficient Machine Learning
+# L1: Introduction to TinyML and Efficient Deep Learning Computing
 
-## 1\. 🎯 Why It Matters for Edge AI
+Course: MIT 6.5940 (Fall 2023): TinyML and Efficient Deep Learning Computing
+Professor: Song Han
+Source Video: EfficientML.ai Lecture 1 - Introduction
+Slides: L1 Slides
 
+This note summarizes the key concepts, motivation, and overview of the course "TinyML and Efficient Deep Learning Computing," delivered by Professor Song Han.
 
+1. Course Introduction and Core Motivation
 
-* **The Core Problem:** The phenomenal performance of modern deep learning models (LLMs, Diffusion Models) comes at the cost of **enormous scale** (billions of parameters), demanding significant computation (FLOPs) and memory (GBs) resources. This prevents their deployment on resource-constrained **Edge Devices** (mobile phones, IoT, microcontrollers).
-* **Edge AI Benefits:** EfficientML techniques are crucial for democratizing AI by enabling **fast, private, and always-on** intelligence directly on the device. This provides benefits like:
-    * **Low Latency:** Inference near the user for real-time applications (e.g., self-driving, video analysis).
-    * **High Privacy:** Data remains local; no need for cloud transfer.
-    * **Reduced Cost:** Lower reliance on expensive cloud GPUs.
-    * **Low Power:** Extended battery life for mobile and IoT applications (**TinyML**). 
+The course addresses the growing gap between the demand for AI computing and the available hardware supply.
 
------
+The Problem:
 
-## 2\. 📝 Key Concepts and Theory
+AI model size (parameters) is growing exponentially ($\approx 10 \times$ per year).
 
-* **Definition & Overview:** **Efficient Machine Learning** focuses on developing algorithms, architectures, and hardware to reduce the computational and memory costs of deep learning models without sacrificing—or minimally impacting—model accuracy.
-* **The Three Pillars of Efficiency:** The course will focus on optimizing across these three dimensions:
-  1.  **Model Compression:** Reducing model size (e.g., Pruning, Quantization).
-  2.  **Efficient Architecture:** Designing smaller, faster models (e.g., Neural Architecture Search, MobileNets).
-  3.  **Efficient Training/Inference:** Optimizing the execution process (e.g., Distributed Training, On-Device Fine-tuning).
-* **Key Efficiency Metrics:** It’s critical to understand the difference between theoretical and practical cost:
-    * **FLOPs (Floating Point Operations):** A measure of computation complexity; *model-specific*.
-    * **Parameter Count:** A measure of memory footprint; *model-specific*.
-    * **Latency (ms):** Real-world time taken for one inference; *hardware-specific*.
-    * **Throughput (inferences/sec):** Rate of processing when batched; *hardware-specific*.
+Hardware (GPU) speed is growing linearly (Moore's Law is slowing down).
 
------
+This divergence makes state-of-the-art AI increasingly expensive, power-hungry, and difficult to deploy.
 
-## 3\. ⚙️ Practical Implementation & Tools
+Key Principle:
 
-* **Implementation Steps:** The practical journey for efficiency often involves: **Training** (or selecting) an efficient *baseline* $\rightarrow$ **Compressing/Optimizing** the model $\rightarrow$ **Compiling** for a target device $\rightarrow$ **Profiling** on the device.
-* **Industry Tools:** The course will introduce state-of-the-art techniques applicable across major frameworks:
-    * Model Format (e.g., **ONNX**).
-    * Mobile/Edge Runtimes (e.g., **TensorFlow Lite, PyTorch Mobile, various hardware SDKs**).
+Compute is cheap, but memory movement/data movement is expensive.
+Much of the model efficiency is bottlenecked by memory bandwidth.
 
------
+The Solution Focus:
 
-## 4\. ⚖️ Trade-offs and Real-World Impact
+The core focus of this class is on:
 
-* **Accuracy vs. Efficiency:** The central tension in this field. Highly efficient models *will* trade some accuracy, but the goal is to find the optimal **Pareto front**—the set of models that are not strictly worse than any other in both accuracy and efficiency.
-* **Hardware Considerations:** Different techniques map to different hardware; for example, **Quantization** is most effective when the target device has low-precision (e.g., INT8) hardware accelerators (NPUs/DSP).
+Model Compression and Acceleration (Pruning, Sparsity, Quantization).
 
------
+Efficient Inference Hardware and Systems to make AI more scalable and deployable.
 
-## 5\. 🧪 Hands-on Lab Preview
+2. Applications of Efficient ML
 
-* **What you will do:** Explore the EfficientML.ai GitHub repository and course tools. Set up the environment for deploying initial models on a local machine (laptop/CPU) as a proxy for an Edge device.
-* **Key Skill Acquired:** Understanding the **model complexity metrics** (FLOPs, MACs, Parameter Count) and learning to run basic **profiling** to measure real-world latency.
+The lecture highlights the necessity of efficient deep learning across various domains:
 
------
+A. Vision Models
+
+| Application | Challenge | Efficient ML Technique & Outcome |
+| Mobile AI (Image Classification, Pose Estimation) | Limited computational power and budget on mobile devices. | Model compression is required to run inference locally on the phone. |
+| TinyML on Microcontrollers | Running complex AI on low-power IoT devices (e.g., $5 microcontrollers) with only Kilobytes of RAM. | MCUNet/TinyEngine system and algorithm co-design enables applications like person detection locally. |
+| On-Device Training | Training is more expensive than inference. Need to update models on the edge for privacy/connectivity issues. | Techniques allow training on a microcontroller with under 256 KB of memory (e.g., 1.7 frames per second). |
+| Vision Transformers (ViT) and SAM | Models like Segment Anything Model (SAM) are computationally heavy, running at $\approx 12$ images/sec on a large cloud GPU. | Efficient-ViT accelerates Vision Transformers by 70 times to $\approx 800$ images/sec without accuracy loss. |
+| Generative Models (Diffusion, GANs) | Training is super costly (e.g., Stable Diffusion costs over $600K to train); inference is slow. | GAN Compression reduces computation by 9x to 21x. Sparse Inference for in-painting only generates the masked region, reducing computation by 3.6 times. |
+| Autonomous Driving (3D Perception) | Processing sparse Lidar Point Clouds is not hardware-friendly and is computationally expensive. Fusing multiple sensors is a challenge. | Fast LidarNet accelerates Lidar perception from 5 frames/sec to 47 frames/sec. Bird-Eye View (BEV) Fusion allows for multi-sensor processing to fit in small hardware like NVIDIA Jetson. |
+
+B. Language Models (LLMs)
+
+Computational Bottleneck: Serving LLMs like GPT-4 can be slow and expensive, often resulting in capacity caps.
+
+Zero/Few-Shot Learning and Chain-of-Thought (CoT): These powerful emergent effects only become possible with really big models (e.g., 175 billion to 540 billion parameters).
+
+Efficiency Techniques to be Covered:
+
+Token Pruning/Sparse Attention: Removes redundant words while preserving sentiment, reducing token length (e.g., pruning a film review to just "F perfect").
+
+SmoothQuant & AWQ: Quantization techniques to compress the model to low precision (e.g., 4-bit weight).
+
+TinyChat Demo: The result of these techniques is being able to deploy the Llama 7 Billion parameter model and run it locally on a laptop (e.g., an older MacBook Air) at a reasonable speed (30 tokens per second).
+
+C. Multi-Modal Models
+
+Vision-Language Models (VLMs): Quantizing models like Llava to 4-bit while maintaining high accuracy is crucial for making them deployable.
+
+Robotics (Vision-Language-Action): These models (e.g., RT-1) are slow (running at a low frequency, $\approx 3$ Hz) due to high computational cost and networking latency, making Edge Computing necessary for real-time control.
+
+3. AI Hardware Landscape
+
+Modern Deep Learning is enabled by three pillars: Algorithm, Hardware, and Large-Scale Data. The hardware landscape is diverse:
+
+Cloud AI (High Power): Large NVIDIA GPUs (A100, H100) are very powerful (up to $\approx 1000$ TOPS for A100) but are extremely expensive (e.g., a single A100 node is $\approx \$250,000$) and consume high power (up to 700 Watts/GPU).
+
+Mobile AI (Mid Power, Mid Memory): Qualcomm Snapdragon, Apple Neural Engine. These are specialized hardware for AI inference, typically running around 10 Watts.
+
+Edge AI (Mid-to-Low Power): NVIDIA Jetson series (Nano, Orin) are used for robotics and autonomous driving, with power consumption from 10 to 60 Watts.
+
+TinyML (Lowest Power, Lowest Memory): Microcontrollers are very cheap (a few dollars) and extremely power efficient (units switch from Watts to milliwatts). Memory is in Kilobytes.
+
+4. Course Logistics
+
+Components:
+
+23 Lectures
+
+5 Lab Assignments (Pruning, Quantization, NAS, LLM Compression to fit on a laptop).
+
+1 Final Project (Proposal, Presentation, Demo, Report).
+
+No Final Exam.
+
+Prerequisites:
+
+No formal prerequisite, but familiarity with Computational Structures (SIMD, cache, branch predictor) and Introduction to Machine Learning (back-propagation, SGD) is helpful.
+
+Key Topics:
+
+Part I: Efficient Inference: Pruning, Quantization, NAS, Knowledge Distillation.
+
+Part II: Domain-Specific Optimization: Transformer/Attention, LLMs, ViT, Video, Point Cloud, Diffusion Models.
+
+Part III: Efficient Training: Distributed Training (Data, Model, Pipeline Parallelism), On-Device Training.
+
+Part IV: Advanced Topics: Quantum Machine Learning.
+
+Video Reference: EfficientML.ai Lecture 1 - Introduction (MIT 6.5940, Fall 2023)
