@@ -17,22 +17,22 @@ While **Weight Magnitude Pruning** (L3) is the simplest method, and **Second-Ord
 ### **A. Taylor Pruning (First-Order Saliency)**
 
 - **Concept:**
-  Measures the estimated change in the loss function ($\Delta L$) if a specific weight ($w{i}$) is removed (set to zero).  
+  Measures the estimated change in the loss function ($\Delta L$) if a specific weight ($w_{i}$) is removed (set to zero).  
 - **Approximation:** The change in loss is approximated using the first-order Taylor series expansion:
 
 $$
-\Delta L = L(w{i}=0) - L(w{i}) \approx - 
-\frac{\partial L}{\partial w{i}} \cdot w{i}
+\Delta L = L(w_{i}=0) - L(w_{i}) \approx - 
+\frac{\partial L}{\partial w_{i}} \cdot w_{i}
 $$  
 
 - **Taylor Magnitude (Saliency Score)**:  
   The absolute value of this loss change is used as the importance score.
   $$
-  \text{Taylor Magnitude} = \left| \frac{\partial L}{\partial w{i}} \cdot w{i} \right|$$
+  \text{Taylor Magnitude} = \left| \frac{\partial L}{\partial w_{i}} \cdot w_{i} \right|$$
 
 - **Pruning Rule:** Weights with the **smallest Taylor Magnitude** are considered least important and should be pruned.  
-- **Advantage over** $|w{i}|$ 
-  By incorporating the gradient ($\frac{\partial L}{\partial w{i}}$), Taylor Pruning provides a more accurate estimate of importance. A small weight with a large gradient is still critical, and this method captures that importance.
+- **Advantage over** $|w_{i}|$ 
+  By incorporating the gradient ($\frac{\partial L}{\partial w_{i}}$), Taylor Pruning provides a more accurate estimate of importance. A small weight with a large gradient is still critical, and this method captures that importance.
 
 ## **2\. Efficient Storage of Unstructured Sparsity**
 
