@@ -1,47 +1,108 @@
 # Lecture 7: Neural Architecture Search (Part I)
+## Quick Reference
 
-- **Lecturers:** Professor Song Han
-- **Date:** Fall 2023
-- **Corresponding Course Website Section:** efficientml.ai
+|Item|Reference|
+|---|---|
+| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Video | [EfficientML.ai Lecture 7 - Neural Architecture Search (Part I)](https://www.youtube.com/watch?v=W84MKJSg90A)  |
+|Lab| [Lab3.ipynb](../../lab/notebooks/Lab3.ipynb) |
+|Professor|Song Han|
 
-## 1. 🎯 Why It Matters for Edge AI
 
-* **The Core Problem:** Human-designed networks (like ResNet or VGG) are often sub-optimal for specific tasks or target hardware. Finding a specialized, high-performance architecture is a time-consuming, trial-and-error process for human engineers.
-* **Edge AI Benefits:** **NAS** automates the design of specialized networks, allowing us to discover models that are not only highly accurate but also highly efficient (low FLOPs, high latency) for a specific **target device** (e.g., a phone's NPU or a specific MCU). This leads to the best **hardware-aware** performance.
+## **1\. Introduction and Motivation for NAS**
 
----
+**Neural Architecture Search (NAS)** is the process of automating the design of neural network architectures. It moves from manually engineered architectures (like ResNet or VGG) to automatically discovered ones (like MobileNetV3 or EfficientNet).
 
-## 2. 📝 Key Concepts and Theory
+### **A. The Challenge of Manual Design**
 
-* **Definition & Overview:** Neural Architecture Search (NAS) is the process of using automated search algorithms (e.g., Reinforcement Learning, Evolutionary Algorithms, Gradient Descent) to find the optimal neural network architecture for a given task and efficiency constraint.
-* **The Three Components of NAS:** A NAS system is defined by three main parts:
-    1.  **Search Space ($\mathcal{A}$):** Defines the set of all possible architectures that can be generated. This could range from simple block-level operations (e.g., which convolution kernel size to use) to entire macro-structures.
-    2.  **Search Strategy ($\mathcal{S}$):** The algorithm used to explore the search space (e.g., Random Search, RL, Evolution, Gradient-based methods).
-    3.  **Performance Estimation Strategy ($\mathcal{E}$):** The method for evaluating a candidate architecture's quality, typically measured by **Accuracy** and **Latency/FLOPs**.
-* **Challenges of Traditional NAS:** The search space is often prohibitively large, and evaluating each candidate architecture by fully training it is extremely computationally expensive (e.g., thousands of GPU hours).
+* **Complexity:** Designing an efficient and accurate network is extremely time-consuming, requires deep expertise, and involves numerous decisions (layer types, kernel sizes, skip connections, activation functions, etc.).  
+* **The Design Trade-off:** The goal is to find the **Pareto Optimal Frontier**—the best set of models that offer the maximum accuracy for a given latency or computational budget (FLOPs). Manual search rarely finds this optimal point.  
+* **Hardware Awareness:** An architecture optimal for a GPU may be sub-optimal for a specialized mobile NPU (Neural Processing Unit). NAS can be made **hardware-aware** to find the best model for a specific device.
 
----
+### **B. The Three Pillars of a NAS System**
 
-## 3. ⚙️ Practical Implementation & Tools
+Any NAS framework consists of three mandatory components that define the search process:
 
-* **Search Space Design (Common):**
-    * **Cell-based Search:** Designing a small "cell" (e.g., a convolutional block) and stacking it repeatedly. This greatly restricts the search space while maintaining good performance.
-    * **Macro Search:** Searching for the overall layer sequence and connectivity.
-* **Search Strategies:**
-    * **Evolutionary Algorithms (EA):** Treating architectures as "individuals," subjecting them to mutation and crossover, and keeping the "fittest" (most accurate/efficient) for the next generation.
-    * **Reinforcement Learning (RL-based NAS):** Using an RNN "controller" to generate the architectural choices (actions) and rewarding the controller based on the child network's performance.
+1. **Search Space:** Defines the set of possible neural network architectures that can be generated.  
+2. **Search Strategy:** Defines the algorithm used to explore the search space efficiently.  
+3. **Performance Estimation Strategy:** Defines how the model's performance (e.g., accuracy and latency) is quickly evaluated without full, expensive training.
 
----
+## **2\. Search Space Definition**
 
-## 4. ⚖️ Trade-offs and Real-World Impact
+The search space defines the structural possibilities of the network. A small space is cheap but limits innovation; a large space is expressive but impossible to search exhaustively.
 
-* **Trade-off:** NAS requires a massive initial computational investment (**search cost**) to find the optimal architecture, but the resulting model (**target cost**) is often much smaller and faster than a hand-designed one. This initial cost is often worth it for widely deployed models (e.g., in mobile phones).
-* **Hardware Awareness:** The **Performance Estimator** in modern NAS should explicitly measure or predict the latency of the candidate model on the **actual target hardware** (e.g., a specific mobile phone chip) rather than just relying on proxy metrics like FLOPs. This is **Hardware-Aware NAS**.
-* **Transferability:** Architectures found via NAS are highly specialized. They may not perform optimally if transferred to a different task or hardware platform.
+### **A. Hierarchical Search Spaces**
 
----
+To balance expressiveness and search cost, NAS often uses a hierarchical design, where the network is built by stacking small, optimized "cells."
 
-## 5. 🧪 Hands-on Lab Preview
+1. **Layer-based Search:** The entire network is designed layer by layer. The space is vast (e.g., millions of possible layer combinations), making the search computationally prohibitive. (Used in early NASNet/AutoML work).  
+2. **Cell-based Search:** The entire network is a repeated stack of two core, learned cells:  
+   * **Normal Cell:** The main building block used to process features while maintaining the spatial resolution.  
+   * **Reduction Cell:** Used to downsample the spatial resolution (e.g., for stride 2\) while increasing the channel count.  
+   * **Benefit:** Greatly reduces the search space size by optimizing a small, transferable primitive (the cell) which is then stacked many times.
 
-* **What you will do:** Explore a simplified, toy NAS search space. You will define a simple search space and use a Random Search strategy to find an architecture that minimizes FLOPs while achieving a minimum required accuracy on a small dataset.
-* **Key Skill Acquired:** Defining a **search space** and understanding how to formulate the **objective function** to balance both accuracy and efficiency constraints ($\text{Objective} = \text{Accuracy} + \lambda \cdot \log(\text{Latency})$, where $\lambda$ is a weight).
+### **B. Operation Set and Connections**
+
+Within a cell, the architecture is defined by:
+
+* **Operations:** The allowed functions (e.g., $3 \times 3$ Conv, $5 \times 5$ Max Pool, $1 \times 1$ Conv, Depthwise Conv, Identity).  
+* **Connections:** How the inputs of one operation connect to the outputs of others (e.g., skip connections).
+
+## **3\. Search Strategy: Exploring the Space**
+
+The search strategy determines the algorithm used to select the next promising architecture to evaluate.
+
+### **A. Reinforcement Learning (RL)**
+
+* **Mechanism:** An RL **Controller** (often an RNN) is trained to generate the string of tokens that defines the network architecture.  
+  * The **Action** is generating a layer/cell design.  
+  * The **Reward** is the validation accuracy of the sampled network after training.  
+* **Drawback:** Very slow. Requires training (or partially training) thousands of models, often consuming thousands of GPU days.
+
+### **B. Evolutionary Search (EA)**
+
+* **Mechanism:** Starts with a random population of network architectures. At each iteration, the best architectures are selected, **mutated** (e.g., change a kernel size, add a skip connection), and the resulting offspring are evaluated.  
+* **Benefit:** Can discover novel, non-intuitive connections and is often more robust than RL in exploring complex spaces.
+
+### **C. Differentiable Architecture Search (DARTS)**
+
+DARTS is the most efficient and dominant strategy today, reducing the search cost from thousands of GPU days to hours.
+
+* **Core Idea:** Make the search space and the architecture selection process **fully differentiable**.  
+* **Mechanism (Supernet):** All possible operations and connections in the search space are modeled simultaneously as a **Supernet**.  
+  * The search process learns both the **weight parameters** ($W$) *and* the **architecture parameters** ($\alpha$).  
+  * $W$ is learned via standard backpropagation (like training a regular model).  
+  * $\alpha$ (which determines *which* operation to select) is also learned via backpropagation, often using a validation set.  
+* **Result:** The search becomes a continuous optimization problem, eliminating the need to train individual sub-networks.
+
+## **4\. Performance Estimation: Speeding up Evaluation**
+
+Even with efficient search strategies, fully training a candidate architecture takes too long. Performance Estimation strategies rapidly estimate a model's quality.
+
+### **A. Weight Sharing (The Key to Efficiency)**
+
+* **Concept:** Instead of training each candidate sub-network from scratch, all candidate sub-networks **share their weights** from a single, large **Supernet**.  
+* **Mechanism:** The Supernet is trained once. When a specific sub-network (architecture) is sampled, it inherits the relevant weights from the Supernet and is quickly evaluated, often without further training.  
+* **Benefits:** Reduces the training cost for the *entire search space* to the cost of training just one Supernet. This is the foundation of most modern, efficient NAS methods.
+
+### **B. Hardware-Aware Metrics**
+
+To truly find the *efficient* frontier, the reward function must move beyond just accuracy and incorporate hardware costs.
+
+$$
+\text{Reward} = \text{Accuracy} \times \left[ \frac{\text{Latency}_{\text{target}}}{\text{Latency}_{\text{measured}}} \right]^k
+$$
+
+* **Goal:** Penalize models that are slow on the target hardware.  
+* **Measured Latency:** The latency is often measured directly on the target hardware (e.g., a phone, a Jetson board, or a microcontroller) using a dedicated profiling tool, ensuring the search finds architectures that are genuinely fast in deployment.
+
+## **5\. Summary and Impact**
+
+NAS has been critical in pushing the efficiency frontier, resulting in architectures that perform far better than their manually designed counterparts.
+
+* **MobileNetV3 and EfficientNet:** Key examples of architectures discovered through AutoML/NAS, demonstrating superior trade-offs between accuracy and computational cost (FLOPs/latency).  
+* **MicroNets:** NAS used specifically to design tiny networks that fit into the **Kilobytes of memory** constraints of microcontrollers, a foundational concept for TinyML.
+
+## References
+
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).
