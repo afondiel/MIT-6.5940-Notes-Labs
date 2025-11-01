@@ -1,8 +1,14 @@
 # Lecture 17: Distributed Training (Part I) - Core Concepts
 
-- **Lecturers:** Professor Song Han
-- **Date:** Fall 2023
-- **Corresponding Course Website Section:** efficientml.ai
+## Quick Reference
+
+|Item|Reference|
+|---|---|
+| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Video | [EfficientML.ai Lecture 17](http://www.youtube.com/watch?v=6cAmS-_vEh8)  |
+|Lab| -- |
+|Professor|[Song Han](https://github.com/songhan)|
+
 
 ## 1. 🎯 Why It Matters for Efficiency
 
@@ -59,3 +65,7 @@ The efficiency of Data Parallelism depends entirely on how the gradients are syn
 3.  **The "Straggler" Problem (Sync-SGD):** Heterogeneous hardware or network fluctuations can cause some workers to lag, idling the entire cluster.
 
 
+
+## References
+
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).

@@ -1,8 +1,14 @@
 # Lecture 18: Distributed Training (Part II) - Advanced Techniques
 
-- **Lecturers:** Professor Song Han
-- **Date:** Fall 2023
-- **Corresponding Course Website Section:** efficientml.ai
+## Quick Reference
+
+|Item|Reference|
+|---|---|
+| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Video | [EfficientML.ai Lecture 18](http://www.youtube.com/watch?v=6cAmS-_vEh8)  |
+|Lab| -- |
+|Professor|[Song Han](https://github.com/songhan)|
+
 
 ## 1. 🎯 Scaling Up: Hybrid Parallelism for LLMs
 
@@ -69,3 +75,8 @@ Modern deep learning frameworks handle these complexities transparently:
 * **NVIDIA Apex/Megatron-LM:** Tools that introduced many of the first practical implementations of **Tensor Parallelism** and advanced Mixed-Precision for Transformer models.
 * **PyTorch FSDP:** The state-of-the-art framework for sharding parameters, gradients, and optimizer states, making **Data Parallelism** memory-efficient enough for models up to hundreds of billions of parameters.
 * **Microsoft DeepSpeed:** A comprehensive optimization library that includes the **ZeRO** stages, as well as complex Pipeline Parallelism schedulers.
+
+
+## References
+
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).

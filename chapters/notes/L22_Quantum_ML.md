@@ -1,8 +1,15 @@
 # Lecture 22: Quantum Machine Learning (QML) 🧠
 
-**Lecturers:** Professor Song Han
-**Date:** Fall 2023
-**Corresponding Course Website Section:** efficientml.ai
+
+## Quick Reference
+
+|Item|Reference|
+|---|---|
+| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Video | [EfficientML.ai Lecture 22](http://www.youtube.com/watch?v=6cAmS-_vEh8)  |
+|Lab| -- |
+|Professor|Hanrui Wang|
+
 
 ## 1. 🎯 Why It Matters for Efficient ML
 
@@ -59,3 +66,7 @@
 * **Key Skill Acquired:** Applying the Parameter-Shift Rule in practice and understanding the workflow of a hybrid quantum-classical machine learning training loop.
 
 ***
+
+## References
+
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).

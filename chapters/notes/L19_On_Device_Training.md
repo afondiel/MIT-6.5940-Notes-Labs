@@ -1,6 +1,13 @@
 # 🧠 The On-Device Training Challenge
 
-Traditional model training, especially using the standard **backpropagation** algorithm, presents two major bottlenecks for TinyML devices:
+## Quick Reference
+
+|Item|Reference|
+|---|---|
+| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Video | [EfficientML.ai Lecture 19](http://www.youtube.com/watch?v=6cAmS-_vEh8)  |
+|Lab| -- |
+|Professor|[Song Han](https://github.com/songhan)|
 
 1.  **Memory Bottleneck (Activations):** Backpropagation requires the storage of **all intermediate activations** from the forward pass to calculate gradients in the backward pass. For a deep neural network, this activation memory can easily exceed the entire SRAM (RAM) of a microcontroller by a large factor (often $>10\times$).
 2.  **Computational/Parameter Bottleneck:** Full fine-tuning requires calculating and storing gradients for **all** model parameters, which is computationally expensive and further increases memory demand due to the need for optimizer states (like those in Adam).
@@ -33,3 +40,8 @@ To further enhance on-device training efficiency, especially to address the crit
 * **Head-Only Fine-Tuning:** The simplest PEFT form, where only the final classification layer(s) are fine-tuned, and all preceding layers are frozen. This offers maximum parameter efficiency but may limit the model's adaptability.
 
 By leveraging these memory-saving and parameter-efficient approaches, TinyML can move beyond simple inference to enable **on-device personalization**, **transfer learning**, and **continuous learning** without relying on energy-intensive cloud or server resources. 
+
+
+## References
+
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).
