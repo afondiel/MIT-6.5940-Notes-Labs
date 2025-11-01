@@ -1,8 +1,14 @@
 # Lecture 15: Advanced Sparsity and Hardware Integration
 
-- **Lecturers:** Professor Song Han
-- **Date:** Fall 2023
-- **Corresponding Course Website Section:** efficientml.ai
+## Quick Reference
+
+|Item|Reference|
+|---|---|
+| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Video | [EfficientML.ai Lecture 15](http://www.youtube.com/watch?v=6cAmS-_vEh8)  |
+|Lab| -- |
+|Professor|[Song Han](https://github.com/songhan)|
+
 
 ## 1. 🎯 Why It Matters for Edge AI
 
@@ -49,3 +55,8 @@
 
 * **What you will do:** Implement **Block Sparsity** (e.g., $2 \times 2$ block zeroing) on a CNN layer. You will compare the compression ratio and the regularity of the resulting weight tensor against both unstructured and full filter pruning.
 * **Key Skill Acquired:** Understanding the computational and memory advantages of **coarse-grained, hardware-aware sparsity** and the process of transforming a dense weight matrix into a deployable sparse format.
+
+
+## References
+
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).
