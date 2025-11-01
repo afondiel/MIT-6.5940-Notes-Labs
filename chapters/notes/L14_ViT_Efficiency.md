@@ -1,8 +1,14 @@
 # Lecture 14: Vision Transformer (ViT) Efficiency
 
-- **Lecturers:** Professor Song Han
-- **Date:** Fall 2023
-- **Corresponding Course Website Section:** efficientml.ai
+## Quick Reference
+
+|Item|Reference|
+|---|---|
+| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Video | [EfficientML.ai Lecture 14 ](http://www.youtube.com/watch?v=6cAmS-_vEh8)  |
+|Lab| -- |
+|Professor|[Song Han](https://github.com/songhan)|
+
 
 ## 1. 🎯 Why It Matters for Edge AI
 
@@ -49,3 +55,8 @@
 
 * **What you will do:** Compare the computational overhead of a vanilla ViT architecture against a hierarchical variant (like a toy Swin Transformer) by analyzing the FLOPs/MACs count for the attention block as the image resolution increases. You will also apply **Quantization** to a pre-trained ViT and measure its accuracy drop.
 * **Key Skill Acquired:** Analyzing the impact of attention complexity in the vision domain, selecting the correct efficient ViT variant for a given task, and applying compression techniques tailored for the Transformer architecture.
+
+
+## References
+
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).
