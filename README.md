@@ -1,6 +1,6 @@
 # MIT 6.5940 - Notes and Labs⚡️
 
-Notes and practical notebooks from [MIT 6.5940, (Fall 2023) : TinyML and Efficient Deep Learning Computing](https://www.youtube.com/watch?v=rCFvPEQTxKI) lectures.
+Notes and practical notebooks from [MIT 6.5940, (Fall 2023) : TinyML and Efficient Deep Learning Computing](https://www.youtube.com/watch?v=rCFvPEQTxKI) lecture.
 
 ## 🌟 Course Overview
 
@@ -105,8 +105,8 @@ For further advanced projects the course provided a set of state-of-the-art rese
 
 ## References
 
-- The Youtube lecture series: [EfficientML.ai Lecture 1 - Introduction (MIT 6.5940, Fall 2023)](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=axVQj3jL6Ix1eyk6).
-- New [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link).
+- Course Youtube Series: [EfficientML.ai Lecture 1 - Introduction (MIT 6.5940, Fall 2023)](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=axVQj3jL6Ix1eyk6)
+- Course [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link)
 - Final project list (2023- 2024): [EfficientML.ai Project Ideas](https://docs.google.com/document/d/1QiCkCUr_1DnLNUCXUM3g0SQRIbVG5XyrQjdfsUPrIeA/edit?usp=sharing)
 
 ## 🙏 Acknowledgements
