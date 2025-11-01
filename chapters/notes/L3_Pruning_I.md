@@ -6,7 +6,7 @@
 |---|---|
 | Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
 | Video | [EfficientML.ai Lecture 3 - Pruning and Sparsity (Part I)](https://www.youtube.com/watch?v=95JFZPoHbgQ)  |
-|Lab| -- |
+|Lab| [Lab1.ipynb](../../lab/notebooks/Lab1.ipynb) |
 |Professor|Song Han|
 
 
