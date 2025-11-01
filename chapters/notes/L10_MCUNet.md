@@ -1,50 +1,87 @@
 # Lecture 10: MCUNet: TinyML on Microcontrollers
 
-- **Lecturers:** Professor Song Han
-- **Date:** Fall 2023
-- **Corresponding Course Website Section:** efficientml.ai
+## Quick Reference
 
-## 1. 🎯 Why It Matters for Edge AI
+|Item|Reference|
+|---|---|
+| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Video | [MCUNet: TinyML on Microcontrollers ](https://www.youtube.com/watch?v=zJ3ZDZXD_zw)  |
+|Lab| -- |
+|Professor|[Song Han](https://github.com/songhan)|
 
-* **The Core Problem:** Microcontrollers (MCUs) have extremely limited resources, often featuring **KB-level SRAM** (e.g., 20KB) and minimal flash memory. This is fundamentally incompatible with standard deep learning, where even a small MobileNet can require MBs of memory. Existing TinyML solutions often require *hand-tuning* the model for each specific MCU.
-* **Edge AI Benefits:** **MCUNet** is a system-algorithm co-design approach that enables running deep learning on off-the-shelf MCUs. It automatically co-optimizes the neural architecture and the inference library, pushing the boundary of what's possible in **TinyML**. It enables deploying ImageNet-level models on tiny devices.
 
----
+## **1. The Computer Architecture Context**
 
-## 2. 📝 Key Concepts and Theory
+To design efficient ML, we must understand the fundamental bottlenecks in modern computing, particularly the distinction between **computation** and **memory access**.
 
-* **Definition & Overview (MCUNet):** An end-to-end framework combining an efficient neural network architecture with a lightweight inference engine specifically designed for ultra-low-power microcontrollers.
-* **Neural Architecture Search for MCUs (TinyNAS):**
-    * **Constraint:** The search must explicitly prioritize extremely low memory (SRAM) usage, not just FLOPs.
-    * **Output:** A specialized family of neural networks optimized for KB-level SRAM constraints.
-* **Memory-Efficient Inference Engine (TinyEngine):**
-    * **The Challenge:** The biggest bottleneck is often not the computation, but the frequent movement of large activation tensors between the tiny on-chip SRAM and the much larger, but slower, flash memory.
-    * **Key Innovation (SRAM Allocation):** TinyEngine uses a **layer-by-layer memory planning** strategy, breaking down large layers into smaller, sequential tasks that reuse the small SRAM area as much as possible, minimizing costly off-chip flash access. This includes sophisticated **tensor tiling** strategies.
+### **A. The Von Neumann Bottleneck**
 
----
+* **Problem:** Traditional computer architectures (Von Neumann) use separate units for the processor (CPU/ALU) and memory (DRAM). All data must be fetched from memory and moved to the processor for computation.  
+* **Energy Cost:** Moving data is vastly more expensive than computing it.  
+  * **Cost of 32-bit Floating-Point (FP) Operation:** $\approx 0.9$ picojoules (pJ).  
+  * **Cost of Moving 32-bit Data (Off-Chip DRAM):** $\approx 100-1000$ pJ.  
+* **Implication:** **Efficiency is bottlenecked by data movement.** Architectures must minimize data movement, which motivates specialized AI accelerators.
 
-## 3. ⚙️ Practical Implementation & Tools
+### **B. Specialized Hardware for ML**
 
-* **Implementation Steps (MCUNet Flow):**
-    1.  **Model Selection/Search (TinyNAS):** Find an architecture that meets the SRAM constraint for activations and model size.
-    2.  **Quantization:** Apply aggressive quantization (often INT8 or even lower) to the model weights.
-    3.  **TinyEngine Compilation:** The model and the memory planning are fed into the TinyEngine compiler. The compiler generates **C code** with specific memory allocation instructions for the target MCU.
-    4.  **Deployment:** The C code is flashed onto the MCU device.
-* **Tools:**
-    * **TinyML Runtimes (e.g., TFLite Micro):** While TFLite Micro provides a runtime, specialized engines like **TinyEngine** go deeper into co-design for memory efficiency.
-    * **Vendor Specific Compilers:** Tools like the ones from Arm or other MCU vendors for bare-metal C/C++ compilation.
+General-purpose CPUs and GPUs are not optimal for the repetitive, high-throughput Multiply-Accumulate (MAC) operations central to deep learning.
 
----
+| Hardware Type | Design Goal | Key Operation | Energy Efficiency (TOPS/W) |
+| :---- | :---- | :---- | :---- |
+| **CPU** | Flexibility, Low Latency (single thread) | Single-Thread Performance, Branching | Low ($\sim 0.1$) |
+| **GPU** | High Parallelism (SIMT), High Throughput | Matrix Multiplication (32-bit FP) | Medium ($\sim 1-10$) |
+| **ASIC / Accelerator (e.g., TPU)** | Specificity, Max Efficiency | Massive MAC Array, Low-Bit/Integer Arithmetic | High ($\sim 10-100$) |
 
-## 4. ⚖️ Trade-offs and Real-World Impact
+## **2\. Key Architectural Components of AI Accelerators**
 
-* **Trade-off:** The high level of co-optimization means the resulting solution is **highly hardware-specific**. The TinyEngine generated for one MCU might not be optimal for another due to differences in SRAM size, cache, and flash layout.
-* **Impact:** MCUNet demonstrated a significant breakthrough, enabling complex tasks like ImageNet classification on commercial off-the-shelf microcontrollers (e.g., an STM32F746) with minimal memory, proving that AI is feasible on devices with only a few hundred KB of memory.
-* **The Critical Bottleneck:** In TinyML, **SRAM/Activation Memory** is the absolute most constrained resource. Solutions must prioritize minimizing the maximum size of *any* activation tensor during inference.
+AI accelerators (ASICs like Google TPU or specialized IP) are designed around maximizing MAC throughput and minimizing memory access.
 
----
+### **A. Processing Element (PE) Array**
 
-## 5. 🧪 Hands-on Lab Preview
+* The heart of the accelerator is the **Systolic Array** (or PE Array), a grid of interconnected Processing Elements (PEs).  
+* **Function:** PEs perform the MAC operations. Weights and input data flow rhythmically across the array, allowing data reuse and eliminating the need for constant memory fetches.  
+* **Data Reuse:** Maximizing reuse of data (input activation, weight, output accumulation) within the PE array is the primary strategy for power efficiency.
 
-* **What you will do:** Work with a **TinyEngine-like simulator** or framework. You will take a tiny, pre-quantized model and analyze its **memory access profile**, demonstrating how a good memory scheduling strategy can reduce the peak SRAM usage to fit a target MCU's constraints.
-* **Key Skill Acquired:** Understanding memory access patterns in embedded devices and appreciating the importance of **system-algorithm co-design** for ultra-constrained environments.
+### **B. Memory Hierarchy**
+
+Accelerators rely on a carefully managed memory hierarchy to keep data close to the PEs.
+
+1. **On-Chip Memory (SRAM):** Small, extremely fast, and highly energy-efficient memory located directly on the chip (e.g., Buffers, Cache). Data in SRAM is $\sim 100\times$ faster/cheaper to access than off-chip DRAM.  
+2. **Off-Chip Memory (DRAM):** Large capacity, but slow and power-hungry (e.g., HBM in modern GPUs/TPUs).
+
+### **C. Dataflow (How Data is Used)**
+
+The dataflow defines how input activations, weights, and partial sums are moved through the PE array and memory hierarchy. The goal is to maximize **Data Reuse**.
+
+| Dataflow Type | Principle | Reuse Focus | Hardware Implication |
+| :---- | :---- | :---- | :---- |
+| **Weight Stationary (WS)** | Load weights once into the PE, stream activations through. | Maximizes **Weight Reuse**. | Effective for Convolutional Layers. |
+| **Output Stationary (OS)** | Fix the partial sum (output feature map) in the PE, stream weights and activations. | Maximizes **Output Reuse**. | Good for large batch sizes. |
+
+## **3\. Optimizing for Low-Precision (Quantization Hardware)**
+
+Hardware achieves massive efficiency gains by shifting from 32-bit floating-point (FP32) to low-bit integer arithmetic (INT8, INT4).
+
+### **A. Integer Arithmetic Benefits**
+
+* **Size:** INT8 weights require $4\times$ less memory bandwidth than FP32.  
+* **Power:** Integer adders and multipliers are significantly smaller and consume much less power than their FP counterparts.  
+* **Tensor Cores:** Dedicated units in modern GPUs (NVIDIA) and specialized ASICs (TPU, Qualcomm) are optimized for **low-precision matrix multiplication**, allowing for higher effective throughput (TOPS) when using INT8 or INT4.
+
+### **B. Handling Sparsity**
+
+As covered in L4, standard dense hardware cannot benefit from unstructured sparsity.
+
+* **Custom Indexing:** To gain speedup from sparse weights, the hardware must include dedicated logic to skip zero-MACs and manage the complex indexing/addressing of non-zero data (e.g., specialized **EIE (Efficient Inference Engine)** architecture).
+
+## **4\. Introduction to TinyML Hardware**
+
+The constraints of TinyML (milliwatts power, Kilobytes memory) require extreme architectural efficiency.
+
+* **Microcontrollers (MCUs):** Typically use low-power CPUs (like ARM Cortex-M series) that lack large SIMD units or complex systolic arrays.  
+* **Solution: Micro-Architectural Co-Design:** TinyML efficiency is achieved by co-designing the network architecture (e.g., MobileNet) and the inference runtime (e.g., **TinyEngine** from MIT) to fit within the memory and compute limits of the MCU.
+
+This lecture provided the foundational hardware knowledge needed to understand the design constraints for efficient ML deployment. We can now proceed to **Lecture 11: TinyML Systems**, which focuses specifically on the challenges and solutions for extreme edge computing.
+## References
+
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).
