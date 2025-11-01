@@ -7,7 +7,7 @@
 |Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
 |Video | [EfficientML.ai Lecture 4 - Pruning and Sparsity (Part II)](https://www.youtube.com/watch?v=sDJymyfAOKY)  |
 |Lab| [Lab1.ipynb](../../lab/notebooks/Lab1.ipynb) |
-|Professor|Song Han|
+|Professor|[Song Han](https://github.com/songhan)|
 
 
 ## **1\. Pruning Criteria: First-Order Information**
