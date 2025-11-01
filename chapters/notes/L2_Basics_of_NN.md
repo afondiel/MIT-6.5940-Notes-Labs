@@ -1,53 +1,103 @@
-# Lecture 2: Basics of Neural Networks for Efficiency
+# L2: Basics of Deep Learning
 
-- **Lecturers:** Professor Song Han
-- **Date:** Fall 2023
-- **Corresponding Course Website Section:** efficientml.ai
+## Quick Reference
 
-## 1\. 🎯 Why It Matters for Edge AI
+|Item|Reference|
+|---|---|
+| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Video | [EfficientML.ai Lecture 2 - Basics of Neural Networks](https://www.youtube.com/watch?v=ieg0RJb7TeI)  |
+|Lab| [L02_NN_Basics.ipynb](../../lab/notebooks/) |
+|Professor|Song Han|
 
-* **The Core Problem:** To optimize an existing neural network, an engineer must first understand **where the bottleneck is**. Is the network compute-bound (too many FLOPs) or memory-bound (too many parameter transfers)? This lecture provides the foundational vocabulary.
-* **Edge AI Benefits:** In Edge AI, every operation counts. Knowing the structure helps an engineer surgically apply optimization techniques. For instance, convolution layers are often **Compute-Bound**, while fully connected layers can be **Memory-Bound** due to heavy weight loading.
+## **1\. Review of Neural Network Fundamentals**
 
------
+This lecture first reviews the core components and operations of Deep Neural Networks (DNNs) to establish a baseline for understanding where efficiency can be gained.
 
-## 2\. 📝 Key Concepts and Theory
+### **A. Core Terminology**
 
-* **Neural Network as a Computational Graph:** A DNN is a series of interconnected operations (nodes) and tensors (edges). Efficiency is about optimizing the nodes and the flow between them.
-* **Core Building Blocks:**
-    * **Convolutional Layer (Conv):** The workhorse of CNNs. Computational cost is dominated by the number of Multiply-Accumulate Operations (**MACs**). $MACs \propto \text{Output\_channels} \times \text{Kernel\_size}^2 \times \text{Input\_size}^2$.
-    * **Fully Connected Layer (FC/Dense):** Each input connects to every output. FLOPs are $O(\text{Input\_size} \times \text{Output\_size})$.
-* **Latency Breakdown (The $T_{total}$ Equation):** The total inference time is roughly the sum of computation time and memory access time.
-  $$T_{\text{total}} \approx T_{\text{compute}} + T_{\text{memory}}$$
-    * $T_{\text{compute}} \propto \frac{\text{Number of Operations (FLOPs)}}{\text{Hardware Peak Compute (OPS/s)}}$
-    * $T_{\text{memory}} \propto \frac{\text{Data Movement (Bytes)}}{\text{Memory Bandwidth (Bytes/s)}}$
-* **Key Insight: Latency vs. Throughput:**
-    * **Throughput** can be increased by **batching** (coarse-grained parallelism, e.g., using more GPU cores).
-    * **Latency** is harder to reduce, often requiring **fine-grained optimization** like overlapping compute with data movement (**memory-compute overlap**).
+- **Neuron/Node:** The fundamental unit, performing an affine transformation ( $W^T X + b$ ) followed by a non-linear activation function.  
+- **Synapses:** The connections between neurons, storing the weights ($W$) and biases ($b$).  
+- **Parameters/Weights:** The trainable values in the network (e.g., $W$ and $b$).
 
------
+### **B. Fundamental Building Blocks**
 
-## 3\. ⚙️ Practical Implementation & Tools
+The efficiency of a network is determined by its architecture, which is built from basic layers:
 
-* **Implementation Steps (Performance Analysis):** Before optimizing, profile a baseline model. Identify the layers with the highest $T_{\text{total}}$ and determine if they are **Compute-Bound** (high FLOPs/MACs) or **Memory-Bound** (high data movement).
-* **Industry Tools for Analysis:** Tools like **TensorFlow Profiler**, **PyTorch Profiler**, or vendor-specific profilers (e.g., Qualcomm Neural Processing SDK's profiling tools) are essential for this breakdown.
+1. **Fully-Connected Layer / Linear Layer:** Every input is connected to every output. Highly parameterized, leading to high memory cost.  
+2. **Convolutional Layer (Conv):** Uses a small kernel (filter) to apply weights across a local region of the input feature map, leading to weight sharing and reduced parameters compared to FC layers.  
+   * **Grouped Convolution:** Divides channels into groups, reducing computation and parameters.  
+   * **Depthwise Convolution:** A special case where the number of groups equals the number of input channels ($g = C_{in}$). This is extremely efficient, often used in MobileNet.  
+3. **Pooling Layers (Max/Avg):** Reduce spatial resolution (H x W) and computational load.  
+4. **Normalization Layers (Batch Norm, Layer Norm):** Stabilize training.  
+5. **Transformer Blocks:** Use Multi-Head Attention (MHA) and Feed-Forward Networks (FFN). Attention layers are a major computational and memory bottleneck, especially in LLMs.
 
------
+## **2\. Essential Efficiency Metrics (Quantifying Cost)**
 
-## 4\. ⚖️ Trade-offs and Real-World Impact
+The core focus of efficiency in this course is on defining and calculating the metrics that determine a model's computational and memory cost.
 
-* **The Right Metric:** A model with lower FLOPs might not be faster in the real world if it is heavily **Memory-Bound**. An efficient model must optimize the overall $T_{\text{total}}$.
-* **Convolutional Optimization:** Techniques like using $1 \times 1$ convolutions (e.g., in MobileNets) are essential for reducing the FLOP-heavy $3 \times 3$ operations while managing the increase in channels.
+### **A. Computational Cost Metrics**
 
------
+These metrics measure the theoretical amount of work performed by the model during a forward pass.
 
-## 5\. 🧪 Hands-on Lab Preview
+| Metric | Full Name | Definition | Relevance |
+| :---- | :---- | :---- | :---- |
+| **MACs** | Multiply-Accumulate Operations | A single operation: $A \times B + C$. The most common operation in neural networks. | **Hardware-Friendly:** Often used by hardware architects as a single cycle operation. |
+| **FLOPs** | Floating-Point Operations | Any single floating-point math operation (+, \-, $\times$, /). Typically, **1 MAC** $\approx$ **2 FLOPs** (1 multiplication \+ 1 addition). | **Algorithm-Friendly:** Standardized metric for computational complexity, regardless of hardware. |
+| **GFLOPs** | Giga-FLOPs ($10^9$ FLOPs) | Common unit for large models. | Practical measure for comparing models like ResNet-50 ($\approx 4$ GFLOPs). |
 
-* **What you will do:** Implement basic building blocks of a neural network (e.g., a simple CNN) and use a profiler to measure the FLOPs/MACs and the real-world latency contribution of each layer.
-* **Key Skill Acquired:** Quantifying the computational cost of a layer using the MACs/FLOPs formula and relating it to observed **latency** to diagnose the performance bottleneck.
+#### **Calculating MACs/FLOPs**
 
-The course notes will continue in this structured format for the remaining 21 lectures.
+1. Fully-Connected Layer:  
+   $$
+   \text{MACs} = 
+   \text{Batch Size} \times 
+   \text{Input Size} \times 
+   \text{Output Size}
+   $$  
+2. Convolution Layer:  
+   $$
+   \text{MACs} \approx 
+   \text{Output H} \times 
+   \text{Output W} \times 
+   \text{Kernel H} \times 
+   \text{Kernel W} \times 
+   \text{Input C} \times 
+   \text{Output C}
+   $$
 
------
+**Key Insight:** For standard convolutional layers, the computational cost (MACs/FLOPs) scales quadratically with the spatial resolution ($H \times W$) and the number of channels ($C_{in} \times C_{out}$).
 
-You can learn more about the course on the official YouTube playlist: [EfficientML.ai Course Playlist (Fall 2023)](https://www.youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB). This link is the source of the entire lecture series you are using for your notes.
+### **B. Memory Cost Metrics**
+
+These metrics measure the resources required to store the model and its intermediate results.
+
+| Metric | Definition | Relevance |
+| :---- | :---- | :---- |
+| **\#Parameters** | Total number of weights and biases in the model. | **Storage Cost:** Directly determines the model's disk size and VRAM usage for weights. |
+| **Model Size** | The physical size of the model (e.g., 1 Parameter (FP32) \= 4 Bytes). | Determines the time required to load the model (Memory Bandwidth). |
+| **Peak \#Activations** | Maximum memory required to store the intermediate feature maps during a forward pass. | **RAM/VRAM Bottleneck:** Critical for inference on memory-constrained devices (e.g., TinyML) and for large batch training. |
+
+### **C. Time and Performance Metrics**
+
+These metrics measure the real-world execution speed.
+
+| Metric | Definition | Importance |
+| :---- | :---- | :---- |
+| **Latency** | The wall-clock time required for a single inference (input to output). | **User Experience:** Critical for real-time applications (e.g., autonomous driving, video processing). |
+| **Throughput (FPS/TPS)** | The number of inferences (Frames/Tokens) processed per second. | **Server Efficiency:** Critical for maximizing the serving capacity of a cloud GPU cluster. |
+
+## **3\. The Efficiency Bottleneck: Memory Access**
+
+Recalling L1's core principle, the lecture emphasizes that the true bottleneck for inference speed is often **Memory Access Cost**, not just the computational FLOPs.
+
+* A model with low FLOPs but poor memory access patterns can be slower than a model with high FLOPs but excellent memory locality (e.g., a **Dense layer vs. a Grouped Conv**).  
+* **Data Types:** The memory footprint is directly proportional to the numerical precision used (FP32 \> FP16 \> INT8). This motivates the entire study of **Quantization** (L5, L6).
+
+## **4\. Lab 0: PyTorch and Efficiency Measurement**
+
+* **Lab Goal:** Introduce PyTorch, basic neural network implementation, and hands-on calculation of the introduced efficiency metrics.  
+* **Key Skills:** Students should be able to define, calculate, and measure **FLOPs/MACs**, **Parameters**, and **Latency** for simple models. This forms the baseline for all subsequent efficiency labs.
+
+## References
+
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [Complete course video series](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).
