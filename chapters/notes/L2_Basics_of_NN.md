@@ -7,7 +7,7 @@
 | Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
 | Video | [EfficientML.ai Lecture 2 - Basics of Neural Networks](https://www.youtube.com/watch?v=ieg0RJb7TeI)  |
 |Lab| [L02_NN_Basics.ipynb](../../lab/notebooks/) |
-|Professor|Song Han|
+|Professor|[Song Han](https://github.com/songhan)|
 
 ## **1\. Review of Neural Network Fundamentals**
 
