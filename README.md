@@ -30,20 +30,20 @@ Upon completion of this course, you will be able to:
 
 | Lecture | Topic (notes) | Slide | Notebook | Reference |
 | :--- | :--- | :--- | :--- | :--- |
-| **L1** | [Introduction](./chapters/notes/L1\_Introduction.md) | [Slides](https://drive.google.com/file/d/1a3z0A1b5747HmocAbHu8kOWglX3CVkha/view?usp=drive\_link) | **—** | [Video](https://youtu.be/6cAmS-\_vEh8?si=2HtY0XwJEfj2gEGK) |
-| **L2** | [Basics of Deep Learning](./chapters/notes/L2\_Basics\_of\_NN.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L02\_NN\_Basics.ipynb](./labs/L02\_NN\_Basics.ipynb)** | [Video](https://youtu.be/Q9bdjoVx\_m4) |
+| **L1** | [Introduction](./chapters/notes/L01\_Introduction.md) | [Slides](https://drive.google.com/file/d/1a3z0A1b5747HmocAbHu8kOWglX3CVkha/view?usp=drive\_link) | **—** | [Video](https://youtu.be/6cAmS-\_vEh8?si=2HtY0XwJEfj2gEGK) |
+| **L2** | [Basics of Deep Learning](./chapters/notes/L02\_Basics\_of\_NN.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L02\_NN\_Basics.ipynb](./labs/L02\_NN\_Basics.ipynb)** | [Video](https://youtu.be/Q9bdjoVx\_m4) |
 
 ### Chapter I: Efficient Inference
 
 | Lecture | Topic (notes) | Slide | Notebook | Reference |
 | :--- | :--- | :--- | :--- | :--- |
-| **L3** | [Pruning and Sparsity (Part I)](./chapters/notes/L3\_Pruning\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
-| **L4** | [Pruning and Sparsity (Part II)](./chapters/notes/L4\_Pruning\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L03\_L04\_Pruning.ipynb](./labs/L03\_L04\_Pruning.ipynb)** | [Video](#) |
-| **L5** | [Quantization (Part I)](./chapters/notes/L5\_Quantization\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link)| **—** | [Video](#) |
-| **L6** | [Quantization (Part II)](./chapters/notes/L6\_Quantization\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L08\_Quantization\_PTQ.ipynb](./labs/L08\_Quantization\_PTQ.ipynb)** | [Video](#) |
-| **L7** | [Neural Architecture Search (Part I)](./chapters/notes/L7\_NAS\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
-| **L8** | [Neural Architecture Search (Part II)](./chapters/notes/L8\_NAS\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
-| **L9** | [Knowledge Distillation](./chapters/notes/L9\_Knowledge\_Distillation.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L09\_Quantization\_QAT.ipynb](./labs/L09\_Quantization\_QAT.ipynb)** | [Video](#) |
+| **L3** | [Pruning and Sparsity (Part I)](./chapters/notes/L03\_Pruning\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L4** | [Pruning and Sparsity (Part II)](./chapters/notes/L04\_Pruning\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L03\_L04\_Pruning.ipynb](./labs/L03\_L04\_Pruning.ipynb)** | [Video](#) |
+| **L5** | [Quantization (Part I)](./chapters/notes/L05\_Quantization\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link)| **—** | [Video](#) |
+| **L6** | [Quantization (Part II)](./chapters/notes/L06\_Quantization\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L08\_Quantization\_PTQ.ipynb](./labs/L08\_Quantization\_PTQ.ipynb)** | [Video](#) |
+| **L7** | [Neural Architecture Search (Part I)](./chapters/notes/L07\_NAS\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L8** | [Neural Architecture Search (Part II)](./chapters/notes/L08\_NAS\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L9** | [Knowledge Distillation](./chapters/notes/L09\_Knowledge\_Distillation.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L09\_Quantization\_QAT.ipynb](./labs/L09\_Quantization\_QAT.ipynb)** | [Video](#) |
 | **L10** | [MCUNet: TinyML on Microcontrollers](./chapters/notes/L10\_MCUNet.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L10\_L11\_NAS.ipynb](./labs/L10\_L11\_NAS.ipynb)** | [Video](#) |
 | **L11** | [TinyEngine and Parallel Processing](./chapters/notes/L11\_TinyEngine.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link)| **[L21\_TinyML\_Deployment.ipynb](./labs/L21\_TinyML\_Deployment.ipynb)** | [Video](#) |
 
