@@ -1,51 +1,72 @@
 # Lecture 8: Neural Architecture Search (Part II)
 
-- **Lecturers:** Professor Song Han
-- **Date:** Fall 2023
-- **Corresponding Course Website Section:** efficientml.ai
+## Quick Reference
 
-## 1. 🎯 Why It Matters for Edge AI
+|Item|Reference|
+|---|---|
+| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Video | [EfficientML.ai Lecture 8 - Neural Architecture Search (Part II)](https://www.youtube.com/watch?v=MOMc8KkGwCc)  |
+|Lab| [Lab3.ipynb](../../lab/notebooks/Lab3.ipynb) |
+|Professor|Song Han|
 
-* **The Core Problem:** The prohibitive search cost of traditional NAS (training thousands of models) is the single biggest blocker to widespread adoption. A faster, more efficient search method is needed.
-* **Edge AI Benefits:** **One-Shot NAS** (especially the **Once-for-All** approach from the HAN Lab) drastically reduces search time by eliminating the need to train individual models. This makes finding the optimal, hardware-specialized architecture feasible within minutes or hours, rather than weeks.
 
----
+## Overview
 
-## 2. 📝 Key Concepts and Theory
+This lecture dives into the **advanced** and practical aspects of Neural Architecture Search (NAS), moving beyond basic search strategies to focus on efficiency, hardware-awareness, and co-design.
 
-* **One-Shot NAS:** The concept of training a single, massive **"Supernet"** that contains all possible candidate architectures as subnetworks.
-    * **Search:** The search is simplified to finding the best *path* or *subnetwork* within the already trained Supernet.
-    * **No Retraining:** Candidate subnetworks can inherit weights directly from the Supernet, avoiding the need for full training.
-* **Once-for-All (OFA) NAS:** A specific, highly effective One-Shot NAS approach:
-    1.  **Train the OFA Supernet:** Train the large Supernet with a specialized training method (e.g., sandwich rule) so that all its subnetworks (with varying depth, width, and kernel size) perform well.
-    2.  **Decouple Search and Training:** The search phase now only requires evaluating the *accuracy* and *latency* of subnetworks without any further training.
-    3.  **Hardware-Aware Search:** Use an evolutionary search algorithm to explore the subnetworks, prioritizing those that satisfy a specific latency constraint on a given target device.
-* **Gradient-Based NAS (DARTS):** A method that makes the architecture search space *continuous* by defining architecture weights and optimizing them simultaneously with the model weights using gradient descent. This is another way to speed up the search dramatically.
+## **1. Efficient Neural Architecture Search (NAS)**
 
----
+Traditional NAS is computationally expensive, often requiring thousands of GPU hours. Efficient NAS techniques aim to drastically reduce this cost.
 
-## 3. ⚙️ Practical Implementation & Tools
+### **A. Weight Sharing (One-Shot NAS)**
 
-* **Implementation Steps (OFA):**
-    1.  **Define Architecture Space:** Specify the ranges for depth, width, and kernel sizes.
-    2.  **Supernet Training:** Train the largest architecture (Supernet) with a specialized sampler to ensure weight sharing works effectively for all subnetworks.
-    3.  **Latency Prediction:** Build a **latency lookup table** or a **latency predictor model** for the target edge device (e.g., Raspberry Pi, Jetson Nano).
-    4.  **Evolutionary Search:** Use the predictor and the Supernet's inherited accuracy to quickly find the Pareto-optimal subnetworks.
-* **Tools:**
-    * **Once-for-All (OFA) Framework:** The specific open-source code/tool from the MIT HAN Lab that implements this framework.
-    * **Neural Network Latency Predictors:** Tools that estimate the runtime of a model on specific hardware, which are essential for hardware-aware NAS.
+- **Concept:** Instead of training thousands of individual architectures, a **SuperNet** (or one-shot model) is created, which encompasses all possible architectures in the search space. 
+- **Mechanism:** All sub-networks within the SuperNet share weights. The SuperNet is trained once, and then the NAS algorithm searches for the best path (sub-network) within the SuperNet without retraining weights. 
 
----
+- **Example:** **DARTS (Differentiable Architecture Search)** is a prominent weight-sharing method that uses continuous relaxation and gradient-based optimization to update both the shared weights and the architecture parameters. 
 
-## 4. ⚖️ Trade-offs and Real-World Impact
+### B. Pruning-Based NAS
 
-* **Search Cost Reduction:** OFA reduces the total NAS cost from **thousands of GPU days** (traditional) to **single-digit days** for the Supernet training plus **minutes/hours** for the hardware-aware search.
-* **Deployment:** OFA enables deploying different, highly efficient subnetworks from the same trained Supernet onto a *variety* of edge devices, a capability known as **Specialized Deployment**. For example, one subnetwork can go to an MCU, and a slightly larger one to a mobile phone.
-* **Challenge:** The Supernet training phase is complex and memory-intensive, requiring advanced techniques to manage the training of all possible configurations simultaneously.
+- **Concept:** Start with a large, over-parameterized SuperNet and prune away the less effective components to find an optimal compact architecture. 
 
----
+- **Once-For-All (OFA) Network:** A single, fully trained SuperNet that supports *all* sub-networks (different depths, widths, and kernel sizes). This allows the architecture to be specialized for different deployment platforms (like Mobile, GPU, CPU) *without* any retraining. 
 
-## 5. 🧪 Hands-on Lab Preview
+## 2. Hardware-Aware NAS (HW-NAS)
 
-* **What you will do:** Utilize the pre-trained **OFA Supernet**. You will input latency constraints for different hypothetical edge devices and use the evolutionary search algorithm to quickly generate and test several highly optimized subnetworks for those constraints.
-* **Key Skill Acquired:** Performing **hardware-aware architecture search** and selecting the optimal architecture on the **Pareto curve** (the line connecting the most accurate models for a given latency/FLOPs).
+NAS traditionally optimizes for accuracy only. HW-NAS incorporates hardware constraints (like latency, power consumption, or memory footprint) directly into the search objective.
+
+- **Motivation:** An architecture that is accurate on a GPU might be extremely slow on a mobile phone due to different memory access and computation patterns. HW-NAS ensures the found architecture is optimal for a specific target hardware.  
+- **Search Objective:** The optimization criterion is typically a weighted combination:
+
+$$
+\text{Maximize} \quad
+\text{Accuracy} - \alpha \times 
+\text{Latency}
+$$
+
+where $\alpha$ is a hyperparameter balancing the two metrics.
+
+- **Latency Prediction:** To avoid running actual inference (which is slow) for every candidate architecture, a **Latency Predictor** is trained. This predictor is usually a lightweight machine learning model that takes the architectural parameters (e.g., number of layers, kernel sizes) as input and quickly outputs the estimated latency on the target device.
+
+## 3. Neural-Hardware Architecture Co-Search
+
+This is the most advanced form of NAS, where the neural network architecture and the hardware accelerator architecture are designed *simultaneously* and *interdependently*.
+
+- **Challenge:** Hardware accelerators (like ASICs or FPGAs) are highly specialized. The optimal hardware design depends on the neural network (NN) structure, and the optimal NN structure depends on the hardware's capabilities.  
+- **Co-Search Loop:** A joint optimization is performed where the search space includes both NN parameters (layers, connections) and hardware parameters (bit-width, memory hierarchy, processing element count). 
+
+- **Goal:** Find a pair of $(\text{NN}, \text{Hardware})$ that achieves the highest performance (e.g., accuracy / latency) for the given budget.
+
+## 4. Zero-Shot NAS (Future Directions)
+
+Zero-Shot NAS explores ways to evaluate the potential performance of a neural network architecture **without any training whatsoever**.
+
+-  **Concept:** Use statistical proxies or analytical metrics (like number of linear regions, or measures of network capacity) that correlate strongly with the final trained accuracy to rank architectures instantly.
+
+- **Benefit:** If successful, this would entirely eliminate the need for training (even SuperNet training), making NAS extremely fast.  
+- **Example:** Metrics based on the Hessian or Jacobian of the network, which measure the complexity or "trainability" of the architecture.
+
+
+## References
+
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).
