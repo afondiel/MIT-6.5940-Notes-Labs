@@ -1,53 +1,90 @@
 # Lecture 6: Quantization (Part II)
 
-- **Lecturers:** Professor Song Han
-- **Date:** Fall 2023
-- **Corresponding Course Website Section:** efficientml.ai
+## Quick Reference
 
-## 1. 🎯 Why It Matters for Edge AI
+|Item|Reference|
+|---|---|
+| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Video | [EfficientML.ai Lecture 6 - Quantization (Part II)](https://www.youtube.com/watch?v=n72ndSimkB8)  |
+|Lab| [Lab2.ipynb](../../lab/notebooks/Lab2.ipynb) |
+|Professor|Song Han|
 
-* **The Core Problem:** Post-Training Quantization (PTQ) can lead to unacceptable accuracy loss, especially for very deep or complex models (like LLMs or Vision Transformers) or when going to ultra-low bit-widths (e.g., INT4, ternary). The model was never "trained" to be robust to the large errors introduced by quantization.
-* **Edge AI Benefits:** **Quantization-Aware Training (QAT)** simulates the quantization process *during* the training phase. This allows the model to learn weights that are inherently robust and "quantization-friendly," recovering almost all the accuracy lost in PTQ while maintaining the full efficiency benefits.
 
----
+## **1\. Challenges with Low-Bit Quantization (INT4 and Below)**
 
-## 2. 📝 Key Concepts and Theory
+While INT8 quantization (L5) is often straightforward, pushing precision down to 4-bit (INT4) or 2-bit (INT2) for extreme compression introduces major challenges, particularly with **outliers**.
 
-* **Quantization-Aware Training (QAT):**
-    * **Mechanism:** The forward pass of the training loop uses a **fake quantization** (simulating the rounding and clipping of the target integer format) to estimate the quantization errors. The backward pass uses the standard full-precision gradients (often using the **Straight-Through Estimator - STE**) to update the full-precision weights.
-    * **Straight-Through Estimator (STE):** Since the `round` operation is non-differentiable, the STE is used in the backward pass. It acts as the identity function for the gradient: $\frac{\partial L}{\partial w} \approx \frac{\partial L}{\partial w_q}$.
-* **The Forward Pass (Fake Quantization):**
-    $$x_q = \text{clip} \left( \text{round} \left( \frac{x}{S} + Z \right), I_{\min}, I_{\max} \right)$$
-    The model *computes* with $x_q$ but *stores* and *updates* $x$.
-* **Other Advanced Quantization Techniques:**
-    * **Mix-Precision Quantization:** Using different bit-widths (e.g., INT8 for some layers, FP16 for critical layers) based on the layer's sensitivity to quantization error.
-    * **Quantization for LLMs:** Specialized techniques like **SmoothQuant** or **AWQ (Activation-aware Weight Quantization)** which address the challenge of highly skewed activation distributions in transformers.
+### **A. The Outlier Problem**
 
----
+* **Observation:** In large, modern neural networks (especially LLMs), the distribution of weights and activations contains a small number of **extreme outliers** (values far from the mean).  
+* **Impact on Quantization:** When using a fixed, narrow bit-width (like INT4), the scaling factor ($S$) must be calculated to cover the entire range, including the outliers. This makes the steps between quantized values very large, leading to significant **rounding error** for the vast majority of non-outlier weights/activations.  
+  * **Analogy:** It's like trying to measure objects from 1 to 100, but one object is at 1,000,000. If you set your scale to cover 1,000,000, your measurement for 10 is almost meaningless.  
+* **Result:** A massive drop in model accuracy and breakdown of performance when quantizing models like **LLaMA** to INT4 using simple min-max techniques.
 
-## 3. ⚙️ Practical Implementation & Tools
+### **B. Groupwise vs. Layerwise Quantization**
 
-* **Implementation Steps (QAT):**
-    1.  **Insert Fake Quant Ops:** Modify the network by inserting "Fake Quantization" nodes after every layer that needs to be quantized.
-    2.  **Fine-tune:** Retrain the model for a few epochs (usually fewer than the original training) using a low learning rate. The model learns to adjust its weights to minimize the error caused by the simulated rounding/clipping.
-    3.  **Final Conversion:** Remove the Fake Quant ops and convert the fine-tuned full-precision weights to the final INT8 format.
-* **Tools:**
-    * **PyTorch QAT Module:** Offers the most flexible and robust implementation for QAT.
-    * **TensorFlow Keras Quantization API:** Used to add quantization wrappers to layers for QAT.
+To mitigate the outlier problem, the **quantization range** should be applied to smaller, more localized groups of data.
 
----
+* **Layerwise Quantization (Simple PTQ):** One scale factor $S$ and zero point $Z$ are used for **all** weights/activations in an entire layer. (Prone to outlier problems).  
+* **Groupwise Quantization:** A separate scale and zero point ($S$ and $Z$) are calculated for a small group of weights (e.g., a group of 128 weights). This allows the scale to adapt to local distributions, minimizing the impact of outliers in other parts of the layer.  
+  * This technique is crucial for achieving high accuracy with INT4 weights.
 
-## 4. ⚖️ Trade-offs and Real-World Impact
+## **2\. Advanced Quantization Algorithms for LLMs**
 
-* **PTQ vs. QAT Trade-off:**
-    * **PTQ:** Fast development time, no retraining cost, moderate accuracy.
-    * **QAT:** Best accuracy, guaranteed deployment success, but requires a small amount of retraining time and access to the training dataset. **QAT is generally preferred for high-accuracy Edge AI systems.**
-* **Bit-width Selection:** The choice between INT8, INT4, or even binary/ternary depends on the accuracy requirement. **INT8 is the industry standard** for general deployment, as it offers the best balance of speed and fidelity.
-* **Deployment Barrier:** Even with QAT, some complex operations (e.g., custom layers or unusual activation functions) might not be supported by the target device's runtime/accelerator, which requires manual kernel optimization or model refactoring.
+These techniques specifically target the quantization of large models like Transformers by mitigating the outlier problem in either weights or activations.
 
----
+### **A. Activation-Aware Weight Quantization (AWQ)**
 
-## 5. 🧪 Hands-on Lab Preview
+AWQ is an efficient post-training quantization (PTQ) method that tackles the sensitivity of LLMs to weight outliers.
 
-* **What you will do:** Implement **Quantization-Aware Training** on a compressed MobileNetV2. You will compare the accuracy of the QAT model against the PTQ model (from Lab 5) and the original FP32 model, demonstrating the superior performance recovery of QAT.
-* **Key Skill Acquired:** Utilizing the Straight-Through Estimator concept for effective training in the presence of non-differentiable operations and producing a near-lossless highly efficient model.
+* **Core Insight:** The importance of a weight is determined not just by its magnitude, but by the magnitude of the **activation** it interacts with. A weight with a moderate value, when multiplied by a massive activation outlier, has a huge impact on the output.  
+* **Method:** AWQ searches for an optimal **channel-wise scaling factor** ($\\alpha$) for the weights *before* quantization. This factor is chosen to protect the weights that interact with large activation outliers.  
+  * It uses a small calibration set to profile the distribution of activations.  
+  * The protected weights are effectively kept in higher precision (or given a better quantization range) while the rest are quantized to INT4.  
+* **Benefit:** AWQ achieves state-of-the-art INT4 weight quantization accuracy for LLMs with minimal overhead, making it widely adopted (e.g., in Hugging Face's AutoGPTQ library).
+
+### **B. SmoothQuant**
+
+SmoothQuant focuses on solving the high sensitivity to **activation outliers** in LLMs.
+
+* **Core Insight:** Activations often have far more extreme outliers than weights, making activation quantization difficult. However, weights are less sensitive to quantization than activations.  
+* **Method:** SmoothQuant **"smooths"** the highly dynamic activation distribution by moving the difficulty (outliers) from the activations to the weights.  
+  * It applies a per-channel smoothing factor ($s$) to the activations.  
+  * To maintain mathematical equivalence, the inverse factor ($1/s$) is then applied to the weights of the *next* layer.
+  $$
+  \text{Output} = \text{Layer2}(\text{Layer1}(\mathbf{X})) = \text{Layer2}(\mathbf{W}_1 \mathbf{X})
+  $$
+  
+  $$
+  \text{Layer2}(\mathbf{W}_1 \mathbf{X}) = \text{Layer2}((\mathbf{W}_1 \cdot \mathbf{s}) \cdot (\mathbf{s}^{-1} \mathbf{X}))
+  $$  
+  
+  * The smoothed activations are now easily quantized, and the slightly modified weights can be quantized without severe loss.  
+* **Benefit:** Allows the use of INT8 quantization for both weights and activations (W8A8) across the entire LLM, maintaining near FP16 accuracy.
+
+## **3\. Deployment: Quantizing the KV Cache**
+
+A major bottleneck for LLM inference latency and memory is the **Key-Value (KV) Cache**.
+
+* **KV Cache Role:** During autoregressive decoding, the **Key** and **Value** vectors of previous tokens from the self-attention mechanism are stored in memory so they don't need to be recomputed for every new token.  
+* **Memory Cost:** The KV cache memory requirement scales linearly with the sequence length and the batch size. For long sequences and large models, the KV cache can dominate VRAM usage.  
+* **Quantizing the KV Cache:** Quantizing the Key and Value vectors (often to INT8) is a crucial technique for LLM deployment:  
+  * It effectively **reduces the LLM's memory consumption** (VRAM usage) by 2x (for INT8) or 4x (for INT4), allowing for longer context windows or larger batch sizes.  
+  * This is a form of **activation quantization** specific to the Transformer architecture.
+
+## **4\. Summary of Quantization Strategies**
+
+| Strategy | Goal | Complexity | Best Accuracy | Common Target |  
+|----------------------|----------------------|----------------------|----------------------|----------------------|
+| PTQ (Min-Max) | Quick compression | Low | Good (INT8) | Vision Models, Simple INT8 |  
+| QAT | Max accuracy at low-bit | High | Best (INT2/INT4) | Extreme edge, maximum accuracy required |  
+| AWQ | INT4 Weight Quant. | Medium | State-of-Art INT4 W | LLMs, reducing weight memory |  
+| SmoothQuant | INT8 Activation Quant. | Medium | High INT8 A | LLMs, reducing activation memory |
+
+## References
+
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).
+
+## Additional Resources
+- [Quantization in Depth - A Crash Course by Hugging Face (DeepLearning.ai)](https://github.com/afondiel/Quantization-in-Depth-HF)
+- [Quantization Fundamentals with Hugging Face (DeepLearning.ai Course)](https://github.com/afondiel/Quantization-Fundamentals-with-HF)
