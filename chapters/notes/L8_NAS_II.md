@@ -7,7 +7,7 @@
 | Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
 | Video | [EfficientML.ai Lecture 8 - Neural Architecture Search (Part II)](https://www.youtube.com/watch?v=MOMc8KkGwCc)  |
 |Lab| [Lab3.ipynb](../../lab/notebooks/Lab3.ipynb) |
-|Professor|Song Han|
+|Professor|[Song Han](https://github.com/songhan)|
 
 
 ## Overview
