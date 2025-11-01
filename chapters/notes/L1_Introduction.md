@@ -7,7 +7,7 @@
 | Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
 | Video | [Introduction to TinyML and Efficient Deep Learning Computing](http://www.youtube.com/watch?v=6cAmS-_vEh8)  |
 |Lab| -- |
-|Professor|Song Han|
+|Professor|[Song Han](https://github.com/songhan)|
 
 ## **1\. Course Introduction and Core Motivation**
 
