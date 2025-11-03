@@ -30,7 +30,7 @@ Upon completion of this course, you will be able to:
 
 | Lecture | Topic (notes) | Slide | Notebook | Reference |
 | :--- | :--- | :--- | :--- | :--- |
-| **L1** | [Introduction](./chapters/notes/L01\_Introduction.md) | [Slides](https://drive.google.com/file/d/1a3z0A1b5747HmocAbHu8kOWglX3CVkha/view?usp=drive\_link) | **—** | [Video](https://youtu.be/6cAmS-\_vEh8?si=2HtY0XwJEfj2gEGK) |
+| **L1** | [Introduction](./chapters/notes/L01\_Introduction.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](https://youtu.be/6cAmS-\_vEh8?si=2HtY0XwJEfj2gEGK) |
 | **L2** | [Basics of Deep Learning](./chapters/notes/L02\_Basics\_of\_NN.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L02\_NN\_Basics.ipynb](./labs/L02\_NN\_Basics.ipynb)** | [Video](https://youtu.be/Q9bdjoVx\_m4) |
 
 ### Chapter I: Efficient Inference
@@ -105,7 +105,7 @@ For further advanced projects the course provided a set of state-of-the-art rese
 
 ## References
 
-- Course Youtube Series: [EfficientML.ai Lecture 1 - Introduction (MIT 6.5940, Fall 2023)](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=axVQj3jL6Ix1eyk6)
+- Course Youtube Series: [EfficientML.ai Course | 2023 Fall | MIT 6.5940](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3)
 - Course [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link)
 - Final project list (2023- 2024): [EfficientML.ai Project Ideas](https://docs.google.com/document/d/1QiCkCUr_1DnLNUCXUM3g0SQRIbVG5XyrQjdfsUPrIeA/edit?usp=sharing)
 
