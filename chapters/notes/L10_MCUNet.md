@@ -84,4 +84,4 @@ The constraints of TinyML (milliwatts power, Kilobytes memory) require extreme a
 This lecture provided the foundational hardware knowledge needed to understand the design constraints for efficient ML deployment. We can now proceed to **Lecture 11: TinyML Systems**, which focuses specifically on the challenges and solutions for extreme edge computing.
 ## References
 
-- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3)
