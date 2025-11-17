@@ -1,3 +1,6 @@
 [submodule "Lab1-4"]
 	path = lab/notebooks/Lab1-4
 	url = https://github.com/yifanlu0227/MIT-6.5940.git
+[submodule "lab/code/parallel-computing-tutorial"]
+	path = lab/code/parallel-computing-tutorial
+	url = https://github.com/afondiel/parallel-computing-tutorial.git
