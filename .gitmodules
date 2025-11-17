@@ -4,6 +4,6 @@
 [submodule "lab/notebooks/Lab5"]
 	path = lab/notebooks/Lab5
 	url = https://github.com/yifanlu0227/LLaMA2-7B-on-laptop.git
-[submodule "lab/code/parallel-computing-tutorial"]
+[submodule "parallel-computing-tutorial"]
 	path = lab/code/parallel-computing-tutorial
 	url = https://github.com/mit-han-lab/parallel-computing-tutorial.git
