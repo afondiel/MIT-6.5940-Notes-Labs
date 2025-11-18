@@ -82,6 +82,10 @@ The constraints of TinyML (milliwatts power, Kilobytes memory) require extreme a
 * **Solution: Micro-Architectural Co-Design:** TinyML efficiency is achieved by co-designing the network architecture (e.g., MobileNet) and the inference runtime (e.g., **TinyEngine** from MIT) to fit within the memory and compute limits of the MCU.
 
 This lecture provided the foundational hardware knowledge needed to understand the design constraints for efficient ML deployment. We can now proceed to **Lecture 11: TinyML Systems**, which focuses specifically on the challenges and solutions for extreme edge computing.
+
 ## References
 
-- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3)
+- [0] EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3)
+
+- [1] OpenAI's GPT-3 Language Model: A Technical Overview (https://lambdalabs.com/blog/demystifying-gpt-3)
+- [2] “Showdown”. The Economist. (https://www.economist.com/science-and-technology/2016/03/12/showdown)
