@@ -21,7 +21,7 @@ To design efficient ML, we must understand the fundamental bottlenecks in modern
   * **Cost of 32-bit Floating-Point (FP) Operation:** $\approx 0.9$ picojoules (pJ).  
   * **Cost of Moving 32-bit Data (Off-Chip DRAM):** $\approx 100-1000$ pJ.  
 * **Implication:** **Efficiency is bottlenecked by data movement.** Architectures must minimize data movement, which motivates specialized AI accelerators.
-
+   
 ### **B. Specialized Hardware for ML**
 
 General-purpose CPUs and GPUs are not optimal for the repetitive, high-throughput Multiply-Accumulate (MAC) operations central to deep learning.
