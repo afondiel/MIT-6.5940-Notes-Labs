@@ -116,3 +116,7 @@ Special thanks to:
 * **Professor [Song Han](https://github.com/songhan)** (MIT/HAN Lab) for his tremendous effort and passion in developing the **EfficientML.ai** framework and for making this cutting-edge research accessible to everyone.
 * **[Yifan Lu](https://github.com/yifanlu0227)** for his dedication to making the course homework and lab materials publicly accessible and available for the community ([All Homeworks Labs Accessible](https://github.com/yifanlu0227/MIT-6.5940?tab=readme-ov-file)).
 
+## Resources
+
+- [MIT 6.172 Performance Engineering of Software Systems, Fall 2018](https://youtube.com/playlist?list=PLUl4u3cNGP63VIBQVWguXxZZi0566y7Wf&si=EdNjEb5G-r9eJcua)
+    - Github notes: https://github.com/simonaertssen/MIT-6.172-Performance-Engineering-of-Software-Systems
