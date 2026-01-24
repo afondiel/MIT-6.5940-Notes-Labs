@@ -106,6 +106,7 @@ For further advanced projects the course provided a set of state-of-the-art rese
 ## References
 
 - Course Youtube Series: [EfficientML.ai Course | 2023 Fall | MIT 6.5940](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3)
+- Course Prerequisites: [pdf](https://drive.google.com/drive/folders/15vk9PbG5EHK5u4mML7InOAQbyuvmxnZl?usp=sharing)
 - Course [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link)
 - Final project list (2023- 2024): [EfficientML.ai Project Ideas](https://docs.google.com/document/d/1QiCkCUr_1DnLNUCXUM3g0SQRIbVG5XyrQjdfsUPrIeA/edit?usp=sharing)
 
@@ -116,7 +117,4 @@ Special thanks to:
 * **Professor [Song Han](https://github.com/songhan)** (MIT/HAN Lab) for his tremendous effort and passion in developing the **EfficientML.ai** framework and for making this cutting-edge research accessible to everyone.
 * **[Yifan Lu](https://github.com/yifanlu0227)** for his dedication to making the course homework and lab materials publicly accessible and available for the community ([All Homeworks Labs Accessible](https://github.com/yifanlu0227/MIT-6.5940?tab=readme-ov-file)).
 
-## Resources
 
-- [MIT 6.172 Performance Engineering of Software Systems, Fall 2018](https://youtube.com/playlist?list=PLUl4u3cNGP63VIBQVWguXxZZi0566y7Wf&si=EdNjEb5G-r9eJcua)
-    - Github notes: https://github.com/simonaertssen/MIT-6.172-Performance-Engineering-of-Software-Systems
