@@ -4,7 +4,7 @@
 
 |Item|Reference|
 |---|---|
-| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Slides | [View Slides](https://drive.google.com/file/d/1a3z0A1b5747HmocAbHu8kOWglX3CVkha/view)|
 | Video | [Introduction to TinyML and Efficient Deep Learning Computing](http://www.youtube.com/watch?v=6cAmS-_vEh8)  |
 |Lab| -- |
 |Professor|[Song Han](https://github.com/songhan)|
