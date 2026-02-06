@@ -13,6 +13,8 @@
 
 The course addresses the growing **gap between the demand for AI computing and the available hardware supply**.
 
+![](../../resources/SmoothQuant2.png)
+
 ### **The Problem:**
 
 * AI model size (parameters) is growing exponentially ( $\approx 10 \times$ per year).  
