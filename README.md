@@ -90,16 +90,16 @@ For further advanced projects the course provided a set of state-of-the-art rese
 
 
 ### 1. Project: TSM for Efficient Video Understanding (Temporal Shift Module)
-* [cite_start]**Goal:** Address the challenge of efficient video analysis by leveraging **Temporal Shift Module (TSM)**, which captures temporal relationships without adding computational cost[cite: 8, 10].
-* [cite_start]**Description:** TSM works by shifting part of the channels along the temporal dimension, facilitating information exchange among neighboring frames[cite: 9]. [cite_start]Projects could involve changing the backbone (e.g., from MobileNetV2) or applying TSM to a new video task like fall detection[cite: 14, 15].
+* **Goal:** Address the challenge of efficient video analysis by leveraging **Temporal Shift Module (TSM)**, which captures temporal relationships without adding computational cost[cite: 8, 10].
+* **Description:** TSM works by shifting part of the channels along the temporal dimension, facilitating information exchange among neighboring frames[cite: 9]. Projects could involve changing the backbone (e.g., from MobileNetV2) or applying TSM to a new video task like fall detection[cite: 14, 15].
 
 ### 2. Project: SIGE - Sparse Engine for Generative AI
-* [cite_start]**Goal:** Accelerate image editing in deep generative models by avoiding the re-synthesis of unedited regions[cite: 34, 35].
-* [cite_start]**Description:** **SIGE** (Sparse Inference GEnerator) is a sparse engine that caches and reuses feature maps from the original image to generate *only* the edited regions[cite: 36]. [cite_start]The project focuses on integrating SIGE with **Stable Diffusion XL (SDXL)** to assess and potentially achieve more significant speed improvements[cite: 37, 39].
+* **Goal:** Accelerate image editing in deep generative models by avoiding the re-synthesis of unedited regions[cite: 34, 35].
+* **Description:** **SIGE** (Sparse Inference GEnerator) is a sparse engine that caches and reuses feature maps from the original image to generate *only* the edited regions[cite: 36]. The project focuses on integrating SIGE with **Stable Diffusion XL (SDXL)** to assess and potentially achieve more significant speed improvements[cite: 37, 39].
 
 ### 3. Project: QServe for Online Quantized LLM Serving
-* [cite_start]**Goal:** Achieve high-throughput, real-time serving of low-precision quantized LLMs (like INT4) in cloud-based settings[cite: 165, 182].
-* **Description:** The project centers on implementing an **online, real-time serving system** using the **QServe** library, which utilizes the **QoQ (W4A8KV4)** quantization algorithm. [cite_start]The final objective is to build an online Gradio demo to serve these highly-efficient, quantized LLMs[cite: 168, 183, 185].
+* **Goal:** Achieve high-throughput, real-time serving of low-precision quantized LLMs (like INT4) in cloud-based settings[cite: 165, 182].
+* **Description:** The project centers on implementing an **online, real-time serving system** using the **QServe** library, which utilizes the **QoQ (W4A8KV4)** quantization algorithm. The final objective is to build an online Gradio demo to serve these highly-efficient, quantized LLMs[cite: 168, 183, 185].
 
 > **Full documentation and project details can be found [here](https://docs.google.com/document/d/1QiCkCUr_1DnLNUCXUM3g0SQRIbVG5XyrQjdfsUPrIeA/edit?usp=sharing)**.
 
