@@ -9,7 +9,7 @@
 |Lab| -- |
 |Professor|[Song Han](https://github.com/songhan)|
 
-## **1\. Course Introduction and Core Motivation**
+## **1. Course Introduction and Core Motivation**
 
 The course addresses the growing **gap between the demand for AI computing and the available hardware supply**.
 
@@ -33,7 +33,7 @@ The core focus of this class is on:
 1. **Model Compression and Acceleration** (Pruning, Sparsity, Quantization).  
 2. **Efficient Inference Hardware and Systems** to make AI more scalable and deployable.
 
-## **2\. Applications of Efficient ML**
+## **2. Applications of Efficient ML**
 
 The lecture highlights the necessity of efficient deep learning across various domains:
 
@@ -64,7 +64,7 @@ The lecture highlights the necessity of efficient deep learning across various d
 * **Vision-Language Models (VLMs):** Quantizing models like Llava to **4-bit** while maintaining high accuracy is crucial for making them deployable.  
 * **Robotics (Vision-Language-Action):** These models (e.g., RT-1) are slow (running at a low frequency, $\approx 3$ Hz) due to high computational cost and networking latency, making **Edge Computing** necessary for real-time control.
 
-## **3\. AI Hardware Landscape**
+## **3. AI Hardware Landscape**
 
 Modern Deep Learning is enabled by three pillars: **Algorithm, Hardware, and Large-Scale Data**. The hardware landscape is diverse:
 
@@ -73,7 +73,7 @@ Modern Deep Learning is enabled by three pillars: **Algorithm, Hardware, and Lar
 * **Edge AI (Mid-to-Low Power):** NVIDIA Jetson series (Nano, Orin) are used for robotics and autonomous driving, with power consumption from **10 to 60 Watts**.  
 * **TinyML (Lowest Power, Lowest Memory):** Microcontrollers are very cheap (a few dollars) and extremely power efficient (units switch from Watts to **milliwatts**). Memory is in **Kilobytes**.
 
-## **4\. Course Logistics**
+## **4. Course Logistics**
 
 ### **Components:**
 
@@ -85,6 +85,7 @@ Modern Deep Learning is enabled by three pillars: **Algorithm, Hardware, and Lar
 ### **Prerequisites:**
 
 * No formal prerequisite, but familiarity with **Computational Structures** (SIMD, cache, branch predictor) and **Introduction to Machine Learning** (back-propagation, SGD) is helpful.
+* I curated the full of resources [here](https://drive.google.com/drive/folders/15vk9PbG5EHK5u4mML7InOAQbyuvmxnZl?usp=sharing).
 
 ### **Key Topics:**
 
