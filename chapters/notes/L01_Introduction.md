@@ -85,7 +85,7 @@ Modern Deep Learning is enabled by three pillars: **Algorithm, Hardware, and Lar
 ### **Prerequisites:**
 
 * No formal prerequisite, but familiarity with **Computational Structures** (SIMD, cache, branch predictor) and **Introduction to Machine Learning** (back-propagation, SGD) is helpful.
-* I curated the full of resources [here](https://drive.google.com/drive/folders/15vk9PbG5EHK5u4mML7InOAQbyuvmxnZl?usp=sharing).
+* I gathered the full list  of resources [here (PDF)](https://drive.google.com/drive/folders/15vk9PbG5EHK5u4mML7InOAQbyuvmxnZl?usp=sharing).
 
 ### **Key Topics:**
 
@@ -96,4 +96,4 @@ Modern Deep Learning is enabled by three pillars: **Algorithm, Hardware, and Lar
 
 ## References
 
-- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [ Complete course video series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940 (Full lecture): [ YouTube Series ](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).
