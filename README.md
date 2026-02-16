@@ -31,7 +31,7 @@ Upon completion of this course, you will be able to:
 | Lecture | Topic (notes) | Slide | Notebook | Reference |
 | :--- | :--- | :--- | :--- | :--- |
 | **L1** | [Introduction](./chapters/notes/L01\_Introduction.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](https://youtu.be/6cAmS-\_vEh8?si=2HtY0XwJEfj2gEGK) |
-| **L2** | [Basics of Deep Learning](./chapters/notes/L02\_Basics\_of\_NN.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L02\_NN\_Basics.ipynb](./labs/L02\_NN\_Basics.ipynb)** | [Video](https://youtu.be/Q9bdjoVx\_m4) |
+| **L2** | [Basics of Deep Learning](./chapters/notes/L02\_Basics\_of\_NN.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L02\_NN\_Basics.ipynb](./lab/notebooks/Lab0.ipynb)** | [Video](https://youtu.be/Q9bdjoVx\_m4) |
 
 ### Chapter I: Efficient Inference
 
