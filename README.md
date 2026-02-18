@@ -38,10 +38,10 @@ Upon completion of this course, you will be able to:
 | Lecture | Topic (notes) | Slide | Notebook | Reference |
 | :--- | :--- | :--- | :--- | :--- |
 | **L3** | [Pruning and Sparsity (Part I)](./chapters/notes/L03\_Pruning\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
-| **L4** | [Pruning and Sparsity (Part II)](./chapters/notes/L04\_Pruning\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L03\_L04\_Pruning.ipynb](./labs/L03\_L04\_Pruning.ipynb)** | [Video](#) |
+| **L4** | [Pruning and Sparsity (Part II)](./chapters/notes/L04\_Pruning\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L03\_L04\_Pruning.ipynb](./lab/notebooks/Lab1.ipynb)** | [Video](#) |
 | **L5** | [Quantization (Part I)](./chapters/notes/L05\_Quantization\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link)| **—** | [Video](#) |
-| **L6** | [Quantization (Part II)](./chapters/notes/L06\_Quantization\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L08\_Quantization\_PTQ.ipynb](./labs/L08\_Quantization\_PTQ.ipynb)** | [Video](#) |
-| **L7** | [Neural Architecture Search (Part I)](./chapters/notes/L07\_NAS\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L6** | [Quantization (Part II)](./chapters/notes/L06\_Quantization\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L08\_Quantization\_PTQ.ipynb](./lab/notebooks/Lab2.ipynb)** | [Video](#) |
+| **L7** | [Neural Architecture Search (Part I)](./chapters/notes/L07\_NAS\_I.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[Lab3\_NAS.ipynb](./lab/notebooks/Lab3.ipynb)** | [Video](#) |
 | **L8** | [Neural Architecture Search (Part II)](./chapters/notes/L08\_NAS\_II.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
 | **L9** | [Knowledge Distillation](./chapters/notes/L09\_Knowledge\_Distillation.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L09\_Quantization\_QAT.ipynb](./labs/L09\_Quantization\_QAT.ipynb)** | [Video](#) |
 | **L10** | [MCUNet: TinyML on Microcontrollers](./chapters/notes/L10\_MCUNet.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L10\_L11\_NAS.ipynb](./labs/L10\_L11\_NAS.ipynb)** | [Video](#) |
@@ -52,7 +52,7 @@ Upon completion of this course, you will be able to:
 | Lecture | Topic (notes) | Slide | Notebook | Reference |
 | :--- | :--- | :--- | :--- | :--- |
 | **L12** | [Transformer and LLM](./chapters/notes/L12\_Transformer\_LLM.md)       | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
-| **L13** | [Efficient LLM Deployment](./chapters/notes/L13\_LLM\_Deployment.md)   | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L13** | [Efficient LLM Deployment](./chapters/notes/L13\_LLM\_Deployment.md)   | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) |**[Lab4\_LLM_Quantization.ipynb](./lab/notebooks/Lab4.ipynb)**| [Video](#) |
 | **L14** | [LLM Post Training](./chapters/notes/L14\_LLM\_Post\_Training.md)      | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
 | **L15** | [Long Context LLM](./chapters/notes/L15\_Long\_Context\_LLM.md)        | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
 | **L16** | [Vision Transformer](./chapters/notes/L16\_Vision\_Transformer.md)     | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[L16\_LLM\_QLoRA\_Finetuning.ipynb](./labs/L16\_LLM\_QLoRA\_Finetuning.ipynb)** | [Video](#) |
@@ -63,7 +63,7 @@ Upon completion of this course, you will be able to:
 
 | Lecture | Topic (notes) | Slide | Notebook | Reference |
 | :--- | :--- | :--- | :--- | :--- |
-| **L19** | [Distributed Training (Part I)](./chapters/notes/L19\_Distributed\_I.md)                  | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
+| **L19** | [Distributed Training (Part I)](./chapters/notes/L19\_Distributed\_I.md)                  | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **[Lab5\_LLM_at_Edge.ipynb](./lab/notebooks/lab5-url.md)** | [Video](#) |
 | **L20** | [Distributed Training (Part II)](./chapters/notes/L20\_Distributed\_II.md)                | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
 | **L21** | [On-Device Training and Transfer Learning](./chapters/notes/L21\_On\_Device\_Training.md) | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
 
