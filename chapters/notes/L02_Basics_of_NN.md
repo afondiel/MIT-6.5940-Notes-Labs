@@ -4,9 +4,9 @@
 
 |Item|Reference|
 |---|---|
-| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Slides | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
 | Video | [EfficientML.ai Lecture 2 - Basics of Neural Networks](https://www.youtube.com/watch?v=ieg0RJb7TeI)  |
-|Lab| [L02_NN_Basics.ipynb](../../lab/notebooks/) |
+|Lab| [Lab0: Deep Learning with PyTorch](../../lab/notebooks/Lab0.ipynb) |
 |Professor|[Song Han](https://github.com/songhan)|
 
 ## **1\. Review of Neural Network Fundamentals**
@@ -93,7 +93,7 @@ Recalling L1's core principle, the lecture emphasizes that the true bottleneck f
 * A model with low FLOPs but poor memory access patterns can be slower than a model with high FLOPs but excellent memory locality (e.g., a **Dense layer vs. a Grouped Conv**).  
 * **Data Types:** The memory footprint is directly proportional to the numerical precision used (FP32 \> FP16 \> INT8). This motivates the entire study of **Quantization** (L5, L6).
 
-## **4\. Lab 0: PyTorch and Efficiency Measurement**
+## **[4\. Lab 0: PyTorch Tutorial](../../lab/notebooks/Lab0.ipynb)**
 
 * **Lab Goal:** Introduce PyTorch, basic neural network implementation, and hands-on calculation of the introduced efficiency metrics.  
 * **Key Skills:** Students should be able to define, calculate, and measure **FLOPs/MACs**, **Parameters**, and **Latency** for simple models. This forms the baseline for all subsequent efficiency labs.
