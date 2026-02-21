@@ -100,4 +100,4 @@ Recalling L1's core principle, the lecture emphasizes that the true bottleneck f
 
 ## References
 
-- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [Complete course video series](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3).
+- EfficientML.ai Course | 2023 Fall | MIT 6.5940: [Complete course video series](https://youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB&si=Uu00N0zKopEixhw3)
