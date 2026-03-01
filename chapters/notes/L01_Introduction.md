@@ -9,7 +9,7 @@
 |Lab| -- |
 |Professor|[Song Han](https://github.com/songhan)|
 
-## **1. Course Introduction and Core Motivation**
+## **1. Introduction and Core Motivation**
 
 The course addresses the growing **gap between the demand for AI computing and the available hardware supply**.
 
