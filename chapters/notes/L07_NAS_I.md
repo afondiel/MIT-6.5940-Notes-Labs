@@ -3,9 +3,9 @@
 
 |Item|Reference|
 |---|---|
-| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Slides | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
 | Video | [EfficientML.ai Lecture 7 - Neural Architecture Search (Part I)](https://www.youtube.com/watch?v=W84MKJSg90A)  |
-|Lab| [Lab3.ipynb](../../lab/notebooks/Lab3.ipynb) |
+|Lab| [Lab3-NAS.ipynb](../../lab/notebooks/Lab3.ipynb) |
 |Professor|[Song Han](https://github.com/songhan)|
 
 

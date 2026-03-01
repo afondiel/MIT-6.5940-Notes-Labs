@@ -4,9 +4,9 @@
 
 |Item|Reference|
 |---|---|
-| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Slides | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
 | Video | [EfficientML.ai Lecture 6 - Quantization (Part II)](https://www.youtube.com/watch?v=n72ndSimkB8)  |
-|Lab| [Lab2.ipynb](../../lab/notebooks/Lab2.ipynb) |
+|Lab| [Lab2-Quantization.ipynb](../../lab/notebooks/Lab2.ipynb) |
 |Professor|[Song Han](https://github.com/songhan)|
 
 

@@ -4,7 +4,7 @@
 
 |Item|Reference|
 |---|---|
-|Slides|[View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+|Slides| [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
 |Course| [Noise Robust Quantum ML](https://www.youtube.com/watch?v=kCTzlodCZII)  |
 |Lab| -- |
 |Professor|Hanrui Wang|

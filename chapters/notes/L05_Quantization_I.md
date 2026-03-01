@@ -4,7 +4,7 @@
 
 |Item|Reference|
 |---|---|
-| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Slides | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
 | Video | [EfficientML.ai Lecture 5 - Quantization (Part I)](https://www.youtube.com/watch?v=MK4k64vY3xo)  |
 |Lab| [Lab2-Quantization.ipynb](../../lab/notebooks/Lab2.ipynb) |
 |Professor|[Song Han](https://github.com/songhan)|
@@ -16,7 +16,7 @@ Quantization is the process of reducing the precision of the numerical represent
 
 ### **A. Why Quantize?**
 
-The primary benefits of quantization directly address the AI Computing Gap discussed in L1:
+The primary benefits of quantization directly address the AI Computing Gap discussed in [L1](./L01_Introduction.md):
 
 1. **Reduced Model Size:** An INT8 weight takes up $\\frac{1}{4}$ the memory of an FP32 weight. This is critical for memory-constrained devices (TinyML, mobile).  
 2. **Faster Inference:** Integer arithmetic operations (INT8) are significantly faster and require less complex hardware than floating-point operations (FP32).  

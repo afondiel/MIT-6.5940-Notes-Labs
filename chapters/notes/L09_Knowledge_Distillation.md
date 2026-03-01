@@ -4,7 +4,7 @@
 
 |Item|Reference|
 |---|---|
-| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Slides | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
 | Video | [EfficientML.ai Lecture 9 - Knowledge Distillation](https://www.youtube.com/watch?v=dSDW_c789zI)  |
 |Lab| -- |
 |Professor|[Song Han](https://github.com/songhan)|

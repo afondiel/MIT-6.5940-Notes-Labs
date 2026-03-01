@@ -4,7 +4,7 @@
 
 |Item|Reference|
 |---|---|
-| Slides | [View Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
+| Slides | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=sharing)|
 | Video | [EfficientML.ai Lecture 12 - Transformer and LLM (Part I)](https://www.youtube.com/watch?v=mR4u6ZaCYe4)  |
 |Lab| -- |
 |Professor|[Song Han](https://github.com/songhan)|
