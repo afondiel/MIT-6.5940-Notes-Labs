@@ -24,7 +24,7 @@ Upon completion of this course, you will be able to:
 * **Math:** Comfort with **Linear Algebra, Calculus, and Probability**.
 * **Prerequisites:** Familiarity with standard deep learning concepts (CNNs, RNNs, basic optimizers).
 
-## 📚 Course Schedule
+## 📚 Course Outiline (Updated from [Fall 2024](https://hanlab.mit.edu/courses/2024-fall-65940))
 
 ### Chapter 0: Introduction
 
