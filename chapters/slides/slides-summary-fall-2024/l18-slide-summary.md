@@ -1,4 +1,4 @@
-# **Lesson 18: Diffusion Models** (sourced from Lec18-Diffusion-Models.pdf) 
+# **Lesson 18: Diffusion Models**
 
 provides a comprehensive overview of deep generative learning, focusing on the mechanics of Denoising Diffusion Probabilistic Models (DDPM), efficient variants like Latent Diffusion, and advanced techniques for acceleration and personalization.
 

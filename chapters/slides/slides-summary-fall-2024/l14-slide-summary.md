@@ -1,4 +1,4 @@
-# **Lesson 14: LLM Post-Training** (sourced from the file titled "Lec14-LLM Post-training.pdf") 
+# **Lesson 14: LLM Post-Training** 
 
 covers the essential techniques for refining Large Language Models (LLMs) after their initial pre-training. This includes fine-tuning for alignment, expanding into multi-modal capabilities, and utilizing prompt engineering to enhance performance.
 
