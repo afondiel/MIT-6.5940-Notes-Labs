@@ -81,14 +81,14 @@ Upon completion of this course, you will be able to:
 | **L25** | [Final Project Presentation](./chapters/notes/L25\_Project\_Pres.md)      | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
 | **L26** | [Final Project Presentation](./chapters/notes/L26\_Project\_Pres.md)      | [Slides](https://drive.google.com/drive/folders/1A3P6IBuS8wCzLlpdRiQBO9b1uoK3pnPf?usp=drive_link) | **—** | [Video](#) |
 
-## 🔊 LA1–LA3: Community Research Extension for Efficient Audio / Computer Audition
+## 🔊 LA1–LA3: Community Research Extension for Audio Domain
 
 > [!NOTE]  
 > **Note:** The lectures prefixed **LA** [(LA1–LA3)](chapters/notes/LA1_Audio_Transformers_ASR.md) are **not** part of the official MIT 6.5940 curriculum. They are community-designed research notes that I created to extend the course's domain-specific coverage to the **audio modality** — an area largely absent from the original syllabus despite its critical importance for Edge AI.
 
 ### Motivation
 
-The official course covers efficient techniques for **Language** (L12–L15) and **Vision** (L16–L18), but the **audio/sound** modality was left out. As an [Edge AI engineer](https://afondiel.github.io/), I found this gap significant for several reasons:
+The official course covers efficient techniques for **Language** (L12–L15) and **Vision** (L16–L18), but the **audio/sound** modality was left out. As an [Edge AI Engineer](https://afondiel.github.io/), I found this gap significant for several reasons:
 
 1. **Audio is the dominant edge modality.** Billions of devices (earbuds, smart speakers, hearing aids, vehicles, MCUs) rely on real-time audio processing — often under tighter latency, memory, and power constraints than vision or text.
 2. **The same efficiency playbook applies.** Every core technique taught in Chapters I–III (pruning, quantization, NAS, knowledge distillation, distributed training) transfers directly to audio models — yet the domain has unique challenges (**long sequences, streaming requirements, sample-rate bottlenecks**) that deserve dedicated coverage.
