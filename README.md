@@ -1,6 +1,6 @@
 # MIT 6.5940 - Notes and Labs⚡️
 
-Notes and hands-on notebooks from [MIT 6.5940, (Fall 2023) : TinyML and Efficient Deep Learning Computing](https://www.youtube.com/watch?v=rCFvPEQTxKI) lecture.
+Notes and hands-on labs from [MIT 6.5940, (Fall 2023) : TinyML and Efficient Deep Learning Computing](https://www.youtube.com/watch?v=rCFvPEQTxKI) lecture.
 
 ## 🌟 Course Overview
 
