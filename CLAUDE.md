@@ -2,103 +2,143 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+> `AGENTS.md` carries equivalent guidance for other coding agents. Both files are standalone by design — when you change facts here (paths, commands, structure), apply the same change there.
+
 ## Purpose
 
-Personal course notes and hands-on labs for MIT 6.5940 (TinyML and Efficient Deep Learning Computing, Fall 2023). The goal is to bridge academic/research content into practical notes for an Edge AI engineer.
+Personal course notes and hands-on labs for MIT 6.5940 (TinyML and Efficient Deep Learning Computing, Prof. Song Han, MIT HAN Lab). The goal is to bridge academic/research content into practical notes for an Edge AI engineer.
+
+This is a *content* repository first and a code repository second. Most work here is writing, correcting, or extending Markdown notes; the notebooks and C++ kernels are supporting practice material. Apply the same rigor to prose accuracy that you would to a failing test.
 
 ## Repository Structure
 
 ```
-chapters/notes/                         # Primary lecture notes (LXX_Topic_Name.md + LA1–LA3 audio extension)
-chapters/notes-last/                    # Draft/previous iterations — NOT canonical, treat as archive
-chapters/slides/                        # PDF lecture slides
-chapters/slides/slides-summary-fall-2024/  # Markdown summaries of Fall 2024 slides (23 files)
-chapters/transcript/                    # Lecture transcripts (L1 and L14 only)
-lab/notebooks/                          # Jupyter notebooks (Lab0–Lab4 + advanced Lab5)
-lab/code/                               # C++ parallel computing tutorial (git submodule)
-resources/references/                   # Papers organized by lecture (L0–L23 + LA1–LA3)
-prompt.md                               # Original AI system prompt used to generate notes
+chapters/notes/                            # Canonical lecture notes (LXX_Topic.md, L01–L23 + LA1–LA3)
+chapters/notes-last/                       # Draft/previous iterations — NOT canonical, treat as archive
+chapters/slides/                           # PDF lecture decks (LecXX-*.pdf)
+chapters/slides/slides-summary-fall-2024/  # Markdown summaries of the Fall 2024 decks (L01–L23)
+chapters/transcript/                       # Lecture transcripts (l1.md and l14.md only)
+lab/notebooks/labN/                        # Working notebooks, Lab0–Lab5, one directory each
+lab/notebooks/helper.py                    # Shared profiling/export utilities used by the notebooks
+lab/notebooks/Lab1-4/                      # SUBMODULE: upstream reference solutions + Lab5 kernels
+lab/code/parallel-computing-tutorial/      # SUBMODULE: C++ matmul optimization tutorial
+resources/references/LXX-papers/           # Papers by lecture (L01–L23 + LA1–LA3)
+requirements.txt                           # Python deps, annotated per-lab
 ```
+
+Files suffixed `-last` or `_last` are prior iterations kept for comparison, not live versions.
+
+## Setup
+
+```bash
+git submodule update --init --recursive   # two submodules; lab work needs both
+pip install -r requirements.txt
+```
+
+`requirements.txt` is the source of truth for Python dependencies and annotates which package belongs to which lab. Version floors target Python 3.12 / torch 2.13. For CUDA, install torch from the PyTorch index first, then the requirements file — the default PyPI wheel is CPU-only on some platforms.
 
 ## Running Labs
 
-**Jupyter notebooks:**
+**Jupyter notebooks** — each lab has its own lowercase directory:
+
 ```bash
-cd lab/notebooks/
-jupyter notebook Lab1.ipynb   # or Lab0–Lab4
+jupyter lab lab/notebooks/lab2/Lab2.ipynb   # lab0 … lab5
 ```
 
-**C++ parallel computing tutorial (lab/code/parallel-computing-tutorial/):**
+Notebooks import `lab/notebooks/helper.py` for parameter counts, MACs (via `torchprofile`), the `Byte`/`KiB`/`MiB`/`GiB` constants, and ONNX export. Reuse those helpers rather than recomputing byte math inline.
+
+**C++ parallel computing tutorial** (`lab/code/parallel-computing-tutorial/`) — the Makefile auto-detects CUDA and ARM vs x86:
+
 ```bash
-make -j            # auto-detects CUDA, ARM vs x86
-./benchmark        # run all benchmarks
-./benchmark SIMD_programming   # run a specific technique
+make -j                        # produces ./benchmark
+./benchmark                    # all techniques
+./benchmark SIMD_programming   # a single technique
 ```
 
-**Lab5 transformer kernels (lab/notebooks/Lab1-4/Lab5/transformer/):**
+**Lab5 transformer kernels** (`lab/notebooks/Lab1-4/Lab5/transformer/`) — INT4/INT8 LLM inference. `IMP` is a **compile-time** define (`CXXFLAGS += -DIMP=$(IMP)`), not a runtime environment variable, and it takes an integer:
+
 ```bash
-make               # builds for x86 AVX2 or ARM NEON
-make test_linear   # compile test binary
-./test_linear      # run unit tests
-IMP=all_techniques ./chat   # run the optimized chat app
+make -j IMP=5      # 0 reference · 1 loop_unrolling · 2 multithreading
+                   # 3 simd_programming · 4 multithreading_loop_unrolling · 5 all_techniques
+./test_linear      # unit tests
+./chat             # interactive demo
+
+./evaluate.sh                  # rebuild + test every implementation in turn
+./evaluate.sh simd_programming # one implementation, by name (only this script takes names)
 ```
 
-**Metal kernels (macOS only):**
-```bash
-cd lab/notebooks/Lab1-4/Lab5/kernels/metal/
-make
-```
+Bare `make` builds both `test_linear` and `chat`. Metal kernels (`Lab5/kernels/metal/`) are macOS-only.
+
+## Lecture Numbering: Two Schemes in One Repo
+
+**`LXX` does not mean the same thing in every directory.**
+
+| Follows Fall **2023** | Follows Fall **2024** |
+|---|---|
+| `chapters/notes/` | `chapters/slides/LecXX-*.pdf` |
+| `resources/references/LXX-papers/` | `chapters/slides/slides-summary-fall-2024/` |
+| | `README.md` tables |
+
+The two agree through L11 and diverge from L12 onward. Concretely:
+
+- `chapters/notes/L14_ViT_Efficiency.md` is Vision Transformers, but `chapters/slides/Lec14-LLM Post-training.pdf` and `slides-summary-fall-2024/L14-slide-summary.md` are LLM post-training.
+- Fall 2024's Vision Transformer deck is `Lec16`, while `chapters/notes/L16_Diffusion_Model.md` is diffusion.
+
+Never pair a note with a deck or slide summary by number alone — **match on topic**, open both to confirm, and state which numbering you used when reporting. The README compounds this: its tables use Fall 2024 numbering while linking to Fall 2023 note filenames, so several of its links already point at the wrong note. Do not treat the README as authoritative for this mapping.
+
+## Content Scope (on-disk `chapters/notes/` numbering)
+
+| Chapter | Lectures | Notes |
+|---|---|---|
+| 0: Introduction | L01–L02 | Introduction, Basics of NN |
+| I: Efficient Inference | L03–L11 | Pruning I/II, Quantization I/II, NAS I/II, Knowledge Distillation, MCUNet, TinyEngine + Parallel Processing |
+| II: Domain-Specific | L12–L16 | Transformer & LLM I/II, ViT Efficiency, Advanced Sparsity & Hardware Integration, Diffusion Model Efficiency |
+| III: Efficient Training | L17–L20 | Distributed Training I/II, On-Device Training, Efficient Fine-tuning & Prompt Engineering |
+| IV: Advanced | L21–L23 | Quantum Basics, Quantum ML, Noise-Robust QML |
+| Audio Extension (community) | LA1–LA3 | Audio Transformers/ASR, Speech Synthesis, Audio-Language Models |
+
+`chapters/notes/` also holds cross-cutting documents: `Summary.md`, `conclusion.md`, `audio-chapter-design.md`, and `audio-chapter-notes-ALL.md`. Course scheduling lives in `chapters/schedule.md`.
+
+### Audio Extension (LA1–LA3)
+
+Community-designed notes applying the course's efficiency principles to audio — a domain the official curriculum omits. **These are not official MIT course material.** Preserve the disclaimers that say so; never present them as course canon.
+
+They mirror the course's pedagogy — start from the breakthrough model, scale up, compress back down — each anchored to a defining paper:
+
+| Lecture | Topic | Breakthrough paper | Parallels (Fall 2024 numbering) |
+|---|---|---|---|
+| LA1 | Audio Transformers & ASR | wav2vec 2.0 (*Baevski et al., 2020*) | L12–L13 |
+| LA2 | Speech Synthesis & Audio Generation | WaveNet (*van den Oord et al., 2016*) | L17–L18 |
+| LA3 | Audio-Language Models | CLAP (*Elizalde et al., 2023*) | L12 + L16 |
 
 ## Lecture Notes Conventions
 
-- Core lectures named `chapters/notes/LXX_Topic_Name.md` (L01–L23)
-- Audio extension lectures named `chapters/notes/LAX_Topic_Name.md` (LA1–LA3) — community-designed, not official
-- Each note includes: quick reference table (slides/video/lab/prof), numbered sections, comparison tables, paper citations
-- Key concepts in **bold** on first mention
-- Citations format: **LoRA** (*Hu et al., 2021*)
-- `chapters/notes-last/` holds draft/previous iterations — not canonical, treat as archive
+- Filename: `chapters/notes/LXX_Topic_Name.md` (audio extension: `LAX_Topic_Name.md`)
+- Open with an H1 `# Lecture NN: Title`, then a `## Quick Reference` table (Slides / Video / Lab / Professor), then numbered sections. Audio notes replace the Professor row with a Credit row.
+- Title case for main headings; **bold** for key concepts on first mention
+- Cite the originating paper for any named algorithm: **LoRA** (*Hu et al., 2021*)
+- GitHub-flavored Markdown; comparison tables are used heavily and are worth preserving
 
 ## Lab Notebook Conventions
 
 - All cells must run top-to-bottom without errors
-- Clear all outputs before committing (no large output blobs in git)
-- Include heading, goals, sanity-check cells, and conclusion
-- New labs go in `lab/notebooks/` named `LXX_lab_topic_name.ipynb`
+- **Clear all outputs before committing** — no output blobs in git
+- Include a heading, stated goals, sanity-check cells, and a conclusion
+- Report benchmarks (accuracy, size, MACs, latency) against the FP32 baseline — that comparison is what the whole course is built around
+- Edit `lab/notebooks/labN/`, not `lab/notebooks/Lab1-4/`. The latter is a read-only upstream submodule; edits there do not commit to this repo.
 
 ## Code Style
 
-Lab5 uses `pyproject.toml` (black, isort, pylint, mypy) with line length 120.
+PEP 8 for Python generally. Lab5 additionally enforces black/isort/pylint/mypy at line length 120 via its own `pyproject.toml` and pre-commit config.
 
-## Content Scope (23 Official Lectures + 3 Audio Extensions)
+Commits use conventional prefixes (`feat:`, `fix:`, `docs:`, `labs:`). Branches: `feat/add-qlora-lab`, `fix/pruning-accuracy-in-L04`.
 
-| Chapter | Lectures | Topics |
-|---------|----------|--------|
-| 0: Intro | L1–L2 | Introduction, NN Basics |
-| I: Efficient Inference | L3–L11 | Pruning, Quantization, NAS, KD, MCUNet, TinyEngine |
-| II: Domain-Specific | L12–L18 | Transformers/LLMs, ViT, GAN/Video/PointCloud, Diffusion |
-| III: Efficient Training | L19–L21 | Distributed, On-Device Training, Fine-tuning |
-| IV: Advanced | L22–L23 | Quantum ML |
-| Audio Extension (community) | LA1–LA3 | Audio Transformers/ASR, Speech Synthesis, Audio-Language Models |
+## Current State / Known Gaps
 
-### Audio Extension (LA1–LA3)
-
-Community-designed notes that apply the course's efficiency principles to audio — a domain the official curriculum doesn't cover:
-
-| Lecture | Topic | Parallel To |
-|---------|-------|-------------|
-| LA1 | Audio Transformers & ASR (wav2vec, Whisper, Conformer) | L12–L13 |
-| LA2 | Speech Synthesis & Audio Generation (FastSpeech, VALL-E, AudioLDM) | L17–L18 |
-| LA3 | Audio-Language Models (CLAP, SALMONN, Qwen-Audio) | L12 + L16 |
-
-### Known Gaps
-
-- **Lab5**: Transformer kernels exist as C++ only; no Jupyter notebook wrapper yet
-- **Transcripts**: Only L1 and L14 present; L2–L23 missing
-- **LA1–LA3 labs**: Audio extension notes have no corresponding Jupyter notebooks yet
-
-## Git Submodule
-
-`lab/code/parallel-computing-tutorial/` is a git submodule. Initialize with:
-```bash
-git submodule update --init --recursive
-```
+- **`lab/notebooks/helper.py` does not compile** — `IndentationError` at line 26, inside `calc_parameters`. Every notebook that imports it fails at the first cell. Fix before running labs.
+- **No note covers GAN / Video / Point Cloud.** The deck exists (`chapters/slides/Lec17-Efficient-GANs-Video-PointCloud.pdf`) but no `chapters/notes/` file corresponds to it — the L15 slot holds Advanced Sparsity instead. This is the largest content gap.
+- **`Lec22` deck is missing** from `chapters/slides/` (present: Lec01–Lec21, Lec23).
+- **`resources/references/` mostly tracks the notes' numbering, but not perfectly** — e.g. `L15-papers/` contains diffusion material that belongs with L16. Verify per-lecture rather than assuming.
+- **Transcripts**: only `l1.md` and `l14.md` present; the rest are missing.
+- **LA1–LA3**: notes only, no accompanying notebooks.
+- **Lab5**: transformer kernels are C++ only; no Jupyter wrapper.
