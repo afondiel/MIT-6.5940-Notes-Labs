@@ -53,3 +53,7 @@ This lab notebook focuses on **Pruning** techniques to reduce the size and laten
 *   **Question 9**: Compares fine-grained and channel pruning.
     *   **Question 9.1**: Discusses advantages and disadvantages of each (e.g., fine-grained: better compression/accuracy but specialized hardware; channel: direct speedup on generic hardware but potentially harder accuracy recovery).
     *   **Question 9.2**: Concludes that channel pruning is generally preferred for smartphone deployment due to its direct speedup on off-the-shelf mobile hardware.
+    
+## References
+- Github: https://github.com/yifanlu0227/LLaMA2-7B-on-laptop
+- Colab: https://drive.google.com/drive/folders/1MhMvxvLsyYrN-4C6eQG8Zj2JeSuyAOf0?usp=drive_link
