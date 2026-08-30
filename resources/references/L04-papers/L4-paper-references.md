@@ -1,4 +1,4 @@
-# L4 Paper Summary
+# L4 Paper References
 
 This list of papers focused on **Pruning Frameworks, AutoML, and Sparse Hardware Accelerators.**
 

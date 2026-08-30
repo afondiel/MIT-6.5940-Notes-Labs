@@ -1,4 +1,4 @@
-# L8 Paper Summary
+# L8 Paper References
 
 This extensive list covers the evolution of modern Computer Vision, from the "Big Bang" of Deep Learning (AlexNet) to the cutting-edge **Neural Architecture Search (NAS)** and **IoT-specific models** (MCUNet).
 

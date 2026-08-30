@@ -1,4 +1,4 @@
-# L5 Paper Summary
+# L5 Paper References
 
 This set of references focuses on **Quantization**, ranging from foundational surveys to extreme binarization and ternarization techniques used in TinyML.
 

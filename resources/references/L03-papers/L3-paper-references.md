@@ -1,4 +1,4 @@
-# L3 Paper Summary
+# L3 Paper References
 
 These are core papers for **TinyML and Efficient Deep Learning Computing**.
 

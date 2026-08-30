@@ -1,4 +1,4 @@
-# L9 Paper Summary
+# LA2 Paper References
 
 This latest set of references from **MIT 6.5940** covers two massive pillars of efficient ML: **Knowledge Distillation (KD)** (the "Teacher-Student" paradigm) and **Advanced Data Augmentation/Regularization**.
 
