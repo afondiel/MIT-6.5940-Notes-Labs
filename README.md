@@ -127,7 +127,7 @@ For further advanced projects the course provided a set of state-of-the-art rese
 * **Goal:** Achieve high-throughput, real-time serving of low-precision quantized LLMs (like INT4) in cloud-based settings[cite: 165, 182].
 * **Description:** The project centers on implementing an **online, real-time serving system** using the **QServe** library, which utilizes the **QoQ (W4A8KV4)** quantization algorithm. The final objective is to build an online Gradio demo to serve these highly-efficient, quantized LLMs[cite: 168, 183, 185].
 
-> **Full documentation and project details can be found [here](https://docs.google.com/document/d/1QiCkCUr_1DnLNUCXUM3g0SQRIbVG5XyrQjdfsUPrIeA/edit?usp=sharing)**.
+> **Please find the full project list [here](https://docs.google.com/document/d/1QiCkCUr_1DnLNUCXUM3g0SQRIbVG5XyrQjdfsUPrIeA/edit?usp=sharing)**.
 
 
 ## ⚠️ Disclaimer
