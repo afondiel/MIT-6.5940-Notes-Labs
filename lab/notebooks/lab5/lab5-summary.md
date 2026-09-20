@@ -76,3 +76,4 @@ Lab 4 quantized weights to 3–4 bits and reported a ~10× size reduction — bu
 - Colab: https://drive.google.com/drive/folders/1MhMvxvLsyYrN-4C6eQG8Zj2JeSuyAOf0?usp=drive_link
 - [TinyChatEngine](https://github.com/mit-han-lab/TinyChatEngine) · [TinyEngine](https://github.com/mit-han-lab/tinyengine) · [AWQ](https://github.com/mit-han-lab/llm-awq)
 - Lecture notes: [L11 TinyEngine & Parallel Processing](../../../chapters/notes/L11_TinyEngine_Parallel.md), [L13 Transformer & LLM II](../../../chapters/notes/L13_Transformer_LLM_II.md)
+- Parallel Computing Benchmarks: [Parallel Computing - Code](https://github.com/afondiel/MIT-6.5940-Notes-Labs/tree/main/lab/code)
