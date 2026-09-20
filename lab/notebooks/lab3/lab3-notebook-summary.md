@@ -1,55 +1,59 @@
-## Notebook Implementation Walkthrough
+## Notebook Summary
 
-This lab notebook focuses on **Pruning** techniques to reduce the size and latency of a neural network, specifically a VGG model trained on the CIFAR-10 dataset.
+This notebook implements **Neural Architecture Search** on a **Once-for-All** super network (*Cai et al., 2020*), searching for subnets that hit hard edge constraints on the **Visual Wake Words** dataset. The point of the lab is that NAS on a pretrained super network is a *search* problem, not a training problem: every candidate is evaluated by predictors in milliseconds instead of being trained.
 
-### 1. Setup
+### Part 0: Super Network and the Design Space
 
-*   **Initial Setup**: Installs the `torchprofile` library and imports all necessary Python libraries (`torch`, `numpy`, `matplotlib`, `torchvision`, etc.).
-*   **Random Seeds**: Sets random seeds for reproducibility across `random`, `numpy`, and `torch`.
-*   **Helper Functions**: Defines several utility functions:
-    *   `download_url`: For fetching pretrained model checkpoints.
-    *   `VGG`: The architecture of the VGG neural network.
-    *   `train` and `evaluate`: Standard training and evaluation loops.
-    *   `get_model_macs`, `get_sparsity`, `get_model_sparsity`, `get_num_parameters`, `get_model_size`: Functions for measuring model characteristics like computational operations (MACs), sparsity, and parameter count.
-    *   `test_fine_grained_prune`: A visual test for the fine-grained pruning implementation.
-*   **Load Model and Data**: Downloads and loads a pretrained VGG model and prepares the CIFAR-10 dataset for training and testing.
+The OFA super network exposes four search dimensions: width multiplier (`wid`), per-block kernel size (`ks` ∈ {3, 5, 7}), per-block expand ratio (`e` ∈ {3, 4, 6}), depth per stage (`d`), and input `image_size`.
 
-### 2. Dense Model Evaluation
+*   **Sampled subnets** span a wide range — 0.7M params → **86.6%** accuracy, 1.5M params → **87.9%**.
+*   **Question 1 — which dimension matters most:** width multiplier and input resolution dominate accuracy; kernel size and expand ratio matter less.
+*   **Design space bounds** (cell 39): smallest subnet **8.3M MACs / 72.0 KB** peak memory, largest **79.4M MACs / 270.0 KB**.
 
-*   **Initial Performance**: Evaluates the *dense* (unpruned) VGG model. The notebook reports an accuracy of `92.95%` and a model size of `35.20 MiB`.
+### Part 1: Predictors
 
-### 3. Weight Distribution
+Search is only cheap if scoring a candidate is cheap. Two predictors replace measurement and training:
 
-*   **Visualization**: Plots histograms of weight distributions for each layer. This visually demonstrates that many weights are clustered around zero, suggesting the potential for pruning.
-*   **Question 1**: Discusses the common characteristics of weight distribution (weights around zero) and how this helps in pruning (by removing small-magnitude weights).
+*   **Efficiency predictor (Question 2)** — computes MACs and peak memory analytically from a subnet config, no forward pass.
+*   **Accuracy predictor (Questions 3–4)** — a 4-layer MLP (128 → 400 → 400 → 400 → 1) over a one-hot encoding of kernel size and expand ratio per block, trained on a dataset of pre-evaluated subnets.
+*   **Calibration check:** mean accuracy across the dataset is **90.3%**; the predictor's chosen subnet scores **91.0%** on the holdout validation set, and predicted-vs-real accuracy correlates tightly (cell 52).
 
-### 4. Fine-grained Pruning
+### Part 2: Search
 
-*   **`fine_grained_prune` function (Question 2)**: Implements magnitude-based fine-grained pruning. It calculates the number of zeros based on target sparsity, determines a pruning threshold, creates a binary mask, and applies it to the weight tensor. This is tested and verified.
-*   **Question 3**: Adjusts target sparsity on a dummy tensor to achieve a specific number of non-zero elements, confirming understanding of the pruning mechanism.
-*   **`FineGrainedPruner` class**: A class to apply and manage pruning masks across the entire model, ensuring sparsity is maintained during training.
-*   **Sensitivity Scan**: This process prunes individual layers at various sparsity levels and measures the impact on accuracy. The `plot_sensitivity_scan` function visualizes these results.
-    *   **Question 4.1**: Confirms that increasing sparsity generally decreases accuracy.
-    *   **Question 4.2**: Notes that different layers exhibit varying sensitivities to pruning.
-    *   **Question 4.3**: Identifies `backbone.conv0.weight` as the most sensitive layer.
-*   **#Parameters Distribution**: A bar chart shows the distribution of parameters across different layers, highlighting which layers contribute most to the model's size.
-*   **Sparsity Selection (Question 5)**: Based on sensitivity curves and parameter distribution, a `sparsity_dict` is defined to set per-layer pruning rates. The goal is to achieve a `25%` model size while maintaining high accuracy. The chosen `sparsity_dict` results in a sparse model size of `8.20 MiB` (`23.30%` of dense model) but an accuracy drop to `87.66%`.
-*   **Finetuning**: The fine-grained pruned model is finetuned for 5 epochs. The pruning mask is reapplied after each training iteration to maintain sparsity. Accuracy is recovered to `92.84%` after finetuning.
+**Random search (Question 5)** vs **evolutionary search (Questions 6–8)** under matched constraints:
 
-### 5. Channel Pruning
+| Constraint | Random search | Evolutionary search |
+|---|---:|---:|
+| MACs ≤ 50M | **93.28%** | 92.26% |
+| MACs ≤ 100M | **93.45%** | 92.83% |
+| Peak memory ≤ 256KB | **92.83%** | 92.26% |
+| Peak memory ≤ 512KB | 93.15% | **93.28%** |
 
-*   **Restore Model**: The model is reverted to its original dense state for this section.
-*   **`get_num_channels_to_keep` and `channel_prune` functions (Question 6)**: Implements the core logic for channel pruning. This involves calculating the number of channels to preserve and adjusting the `weight` tensor of convolutional layers accordingly. A sanity check confirms correct MACs reduction.
-*   **Initial Channel Pruning Accuracy**: A naive uniform channel pruning (30% `prune_ratio`) leads to a significant accuracy drop to `28.14%`.
-*   **Ranking Channels by Importance (Question 7)**: Implements `get_input_channel_importance` (using Frobenius norm) and `apply_channel_sorting` to sort channels by their importance. This allows for more intelligent pruning decisions. Sorting is verified to not change accuracy.
-*   **Pruning with Sorting**: Channel pruning (30% ratio) after sorting channels by importance improves accuracy to `36.81%`, demonstrating the benefit of importance-based pruning.
-*   **Finetuning Channel Pruned Model**: The channel-pruned model (with sorting) is finetuned for 5 epochs, recovering accuracy to `92.26%`.
-*   **Measure Acceleration (Question 8)**: Compares the latency, MACs, and number of parameters between the original and channel-pruned models.
-    *   **Question 8.1**: Explains why 30% channel removal leads to ~50% computation reduction (due to quadratic scaling of operations with channel count).
-    *   **Question 8.2**: Discusses why latency reduction is slightly less than computation reduction (due to other factors like data movement and overheads).
+Random search is competitive here and wins three of four — a useful negative result. Evolutionary search is sensitive to `evo_params` (population size, mutation rate, parent ratio), and the default settings are not tuned per constraint.
 
-### 6. Comparison of Pruning Methods
+### Part 2b: Real-World Constraints (Question 9)
 
-*   **Question 9**: Compares fine-grained and channel pruning.
-    *   **Question 9.1**: Discusses advantages and disadvantages of each (e.g., fine-grained: better compression/accuracy but specialized hardware; channel: direct speedup on generic hardware but potentially harder accuracy recovery).
-    *   **Question 9.2**: Concludes that channel pruning is generally preferred for smartphone deployment due to its direct speedup on off-the-shelf mobile hardware.
+Visual Wake Words targets MCU-class deployment, so both MACs *and* peak memory bind simultaneously. Evolutionary search with per-task tuned `evo_params`:
+
+| Constraint | Accuracy | Credit threshold | Result |
+|---|---:|---|---|
+| 60M MACs **and** 250 KB | **92.93%** | ≥ 92.5% | full credit |
+| 30M MACs **and** 200 KB | **90.15%** | ≥ 90% (bonus) | bonus earned |
+
+### Question 10: Design Space Limits
+
+*   **A — activation ≤ 256KB and MACs ≤ 15M: Yes.** The smallest subnet in the space sits at **72.0 KB / 8.3M MACs** (cell 70), comfortably inside both bounds.
+*   **B — activation ≤ 64 KB: No.** 72.0 KB is the floor of this design space; no subnet can go below it without changing the super network itself.
+
+### Key Takeaways
+
+1.  **Predictors are what make NAS tractable.** Analytic efficiency plus a learned accuracy predictor turn each candidate evaluation into a lookup, which is what allows thousands of subnets to be scored per search.
+2.  **Evolutionary search is not automatically better than random.** At these budgets random search matched or beat it in 3 of 4 settings. The advantage of evolution shows up once constraints get tight and multi-dimensional — which is exactly where Question 9 lives.
+3.  **Peak memory, not MACs, is the binding constraint on MCUs.** The design space floor is 72 KB of activation, and that floor — not compute — is what rules out Question 10B.
+4.  **The search space sets the ceiling and the floor.** No search strategy can produce a 64 KB subnet from a super network whose minimum is 72 KB.
+
+## References
+- Lab3: https://github.com/afondiel/MIT-6.5940-Notes-Labs/tree/main/lab/notebooks/lab3
+- **Once-for-All: Train One Network and Specialize it for Efficient Deployment** (*Cai et al., 2020*) — https://arxiv.org/abs/1908.09791
+- **MCUNet: Tiny Deep Learning on IoT Devices** (*Lin et al., 2020*) — https://arxiv.org/abs/2007.10319
+- Lecture notes: [L07 NAS I](../../../chapters/notes/L07_NAS_I.md), [L10 MCUNet](../../../chapters/notes/L10_MCUNet.md)
