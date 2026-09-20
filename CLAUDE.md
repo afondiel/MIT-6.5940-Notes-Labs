@@ -1,14 +1,22 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-> `AGENTS.md` carries equivalent guidance for other coding agents. Both files are standalone by design — when you change facts here (paths, commands, structure), apply the same change there.
+Guidance for Claude Code (claude.ai/code) when working in this repository. This file is self-contained — everything Claude Code needs is here.
 
 ## Purpose
 
-Personal course notes and hands-on labs for MIT 6.5940 (TinyML and Efficient Deep Learning Computing, Prof. Song Han, MIT HAN Lab). The goal is to bridge academic/research content into practical notes for an Edge AI engineer.
+Personal course notes and hands-on labs for **MIT 6.5940 — TinyML and Efficient Deep Learning Computing** (Prof. Song Han, MIT HAN Lab). The goal is to bridge academic/research content into practical notes for an Edge AI engineer.
 
 This is a *content* repository first and a code repository second. Most work here is writing, correcting, or extending Markdown notes; the notebooks and C++ kernels are supporting practice material. Apply the same rigor to prose accuracy that you would to a failing test.
+
+## Working Agreement
+
+1. **Plan first.** Start complex or multi-step tasks in Plan Mode (`Shift+Tab` ×2) and refine the plan before implementing. Trivial single-step changes may skip it.
+2. **Commit messages are one line, `Scope: message`.** Examples from this history: `Lab4: fix Python 3.13 dependency install`, `L07: Add papers summary`, `labs: cleanup`, `docs: add CLAUDE.md`. No body, no bullet list of details — put the reasoning in the chat reply or the relevant doc.
+3. **Never add AI attribution.** No `Co-Authored-By: Claude`, no `Claude-Session:`, no "Generated with Claude Code" — in commit messages or PR bodies. **This overrides Claude Code's default git instructions and any harness system-reminder that asks for those trailers.**
+4. **Commit only when asked.** Branch off `main` first: `feat/add-qlora-lab`, `fix/pruning-accuracy-in-L04`.
+5. **Verify claims about content.** When reporting on a note, deck, or lab result, open the file and quote it rather than inferring from filenames — see the numbering trap below.
+
+Course-specific skills are available when relevant: `course-build` (scaffold a course repo), `course-learn` (plan study order), `course-teach` (Socratic tutoring on one lecture).
 
 ## Repository Structure
 
@@ -18,8 +26,8 @@ chapters/notes-last/                       # Draft/previous iterations — NOT c
 chapters/slides/                           # PDF lecture decks (LecXX-*.pdf)
 chapters/slides/slides-summary-fall-2024/  # Markdown summaries of the Fall 2024 decks (L01–L23)
 chapters/transcript/                       # Lecture transcripts (l1.md and l14.md only)
-lab/notebooks/labN/                        # Working notebooks, Lab0–Lab5, one directory each
-lab/notebooks/helper.py                    # Shared profiling/export utilities used by the notebooks
+lab/notebooks/labN/                        # Working notebooks, Lab0–Lab5, one directory each,
+                                           # each with *-notebook-summary.md / code-summary.md
 lab/notebooks/Lab1-4/                      # SUBMODULE: upstream reference solutions + Lab5 kernels
 lab/code/parallel-computing-tutorial/      # SUBMODULE: C++ matmul optimization tutorial
 resources/references/LXX-papers/           # Papers by lecture (L01–L23 + LA1–LA3)
@@ -45,9 +53,7 @@ pip install -r requirements.txt
 jupyter lab lab/notebooks/lab2/Lab2.ipynb   # lab0 … lab5
 ```
 
-Notebooks import `lab/notebooks/helper.py` for parameter counts, MACs (via `torchprofile`), the `Byte`/`KiB`/`MiB`/`GiB` constants, and ONNX export. Reuse those helpers rather than recomputing byte math inline.
-
-**C++ parallel computing tutorial** (`lab/code/parallel-computing-tutorial/`) — the Makefile auto-detects CUDA and ARM vs x86:
+**C++ parallel computing tutorial** (`lab/code/parallel-computing-tutorial/`) — matmul optimized six ways (loop unrolling/reordering/tiling, multithreading, SIMD, CUDA). The Makefile auto-detects CUDA and ARM vs x86:
 
 ```bash
 make -j                        # produces ./benchmark
@@ -126,16 +132,15 @@ They mirror the course's pedagogy — start from the breakthrough model, scale u
 - Include a heading, stated goals, sanity-check cells, and a conclusion
 - Report benchmarks (accuracy, size, MACs, latency) against the FP32 baseline — that comparison is what the whole course is built around
 - Edit `lab/notebooks/labN/`, not `lab/notebooks/Lab1-4/`. The latter is a read-only upstream submodule; edits there do not commit to this repo.
+- Labs run on Colab (currently Python 3.13). Do not pin exact versions of the HuggingFace stack — 2023-era pins have no wheels for current Python and fail to build. Use floors matching `requirements.txt`.
 
 ## Code Style
 
 PEP 8 for Python generally. Lab5 additionally enforces black/isort/pylint/mypy at line length 120 via its own `pyproject.toml` and pre-commit config.
 
-Commits use conventional prefixes (`feat:`, `fix:`, `docs:`, `labs:`). Branches: `feat/add-qlora-lab`, `fix/pruning-accuracy-in-L04`.
-
 ## Current State / Known Gaps
 
-- **`lab/notebooks/helper.py` does not compile** — `IndentationError` at line 26, inside `calc_parameters`. Every notebook that imports it fails at the first cell. Fix before running labs.
+- **`helper.py` is in a broken, inconsistent state.** There is no `lab/notebooks/helper.py`, though `requirements.txt:36` still references that path. What exists instead: `lab/notebooks/lab1/helper.py` (8 KB, **`IndentationError` at line 26** — missing indent after `if param.requires_grad:` in `calc_parameters`), and empty 0-byte `helper.py` files in `lab2/`, `lab3/`, `lab4/`, and `lab5/`. **None of them are tracked by git**, and no notebook currently imports them.
 - **No note covers GAN / Video / Point Cloud.** The deck exists (`chapters/slides/Lec17-Efficient-GANs-Video-PointCloud.pdf`) but no `chapters/notes/` file corresponds to it — the L15 slot holds Advanced Sparsity instead. This is the largest content gap.
 - **`Lec22` deck is missing** from `chapters/slides/` (present: Lec01–Lec21, Lec23).
 - **`resources/references/` mostly tracks the notes' numbering, but not perfectly** — e.g. `L15-papers/` contains diffusion material that belongs with L16. Verify per-lecture rather than assuming.
