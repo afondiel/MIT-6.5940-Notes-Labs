@@ -32,7 +32,7 @@ pip install -r requirements.txt
 **Jupyter labs** — each lab lives in its own lowercase directory:
 
 ```bash
-jupyter lab lab/notebooks/lab2/Lab2.ipynb   # lab0 … lab5
+jupyter lab lab/notebooks/playground/lab2/Lab2.ipynb   # lab0 … lab5
 ```
 
 **C++ parallel computing tutorial** (`lab/code/parallel-computing-tutorial/`, submodule) — matmul optimized six ways (loop unrolling/reordering/tiling, multithreading, SIMD, CUDA). The Makefile auto-detects CUDA and ARM vs x86:
@@ -110,14 +110,14 @@ Preserve the disclaimers distinguishing these from official material; do not pre
 ### Lab layout
 
 ```
-lab/notebooks/labN/          # working copies — Lab0 … Lab5, with per-lab
-                             # *-notebook-summary.md and code-summary.md notes
+lab/notebooks/playground/labN/          # working copies — Lab0 … Lab5, with per-lab
+                             # a summary .md (Lab5: lab5-summary.md)
 lab/notebooks/Lab1-4/        # SUBMODULE: upstream reference solutions
                              # (yifanlu0227/MIT-6.5940) + Lab5 kernels
 lab/code/                    # SUBMODULE: parallel-computing-tutorial
 ```
 
-`lab/notebooks/labN/` holds the *worked* versions; `lab/notebooks/Lab1-4/` is the read-only upstream. Edit the former, not the latter — changes inside a submodule do not commit to this repo. Files suffixed `-last` or `_last` are prior iterations kept for comparison; `chapters/notes-last/` is likewise an archive, **not** canonical.
+`lab/notebooks/playground/labN/` holds the *worked* versions; `lab/notebooks/Lab1-4/` is the read-only upstream. `playground/` holds personal work and local runs; the `Lab1-4/` submodule stays pristine as the original author's baseline. The split is deliberate: upstream pins rot (Lab 4's 2023 stack no longer installs on Python 3.13), so keeping the two apart lets you compare before and after a fix. Edit the former, not the latter — changes inside a submodule do not commit to this repo. Files suffixed `-last` or `_last` are prior iterations kept for comparison; `chapters/notes-last/` is likewise an archive, **not** canonical.
 
 ## Conventions
 
@@ -129,7 +129,7 @@ lab/code/                    # SUBMODULE: parallel-computing-tutorial
 
 ## Current State
 
-- **`helper.py` is in a broken, inconsistent state.** There is no `lab/notebooks/helper.py`, though `requirements.txt:36` still references that path. What exists instead: `lab/notebooks/lab1/helper.py` (8 KB, **`IndentationError` at line 26** — missing indent after `if param.requires_grad:` in `calc_parameters`), and empty 0-byte `helper.py` files in `lab2/`, `lab3/`, `lab4/`, and `lab5/`. **None of them are tracked by git**, and no notebook currently imports them.
+- **`helper.py` is in a broken, inconsistent state.** There is no `lab/notebooks/playground/helper.py`, though `requirements.txt:36` still references that path. What exists instead: `lab/notebooks/playground/lab1/helper.py` (8 KB, **`IndentationError` at line 26** — missing indent after `if param.requires_grad:` in `calc_parameters`), and empty 0-byte `helper.py` files in `lab2/`, `lab3/`, `lab4/`, and `lab5/`. **None of them are tracked by git**, and no notebook currently imports them.
 - **No note covers GAN / Video / Point Cloud.** The deck exists (`chapters/slides/Lec17-Efficient-GANs-Video-PointCloud.pdf`) but no `chapters/notes/` file corresponds to it — the L15 slot holds Advanced Sparsity instead. This is the largest content gap.
 - **`Lec22` deck is missing** from `chapters/slides/` (present: Lec01–Lec21, Lec23).
 - **`resources/references/` mostly tracks the notes' numbering, but not perfectly** — e.g. `L15-papers/` contains diffusion material that belongs with L16. Verify per-lecture rather than assuming.
